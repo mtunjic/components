@@ -9,6 +9,8 @@
 #include <string>
 #include <list>
 #include <functional>
+#include <random>
+
 
 // random_iota
 template <ForwardIterator I>

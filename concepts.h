@@ -5,10 +5,28 @@
 #define TotallyOrdered typename
 #define StrictWeakOrdering typename
 
+//#define Pointer typename
+#define Number typename
+#define Unsigned typename
+#define Integral typename
+
 #define InputIterator typename
+#define OutputIterator typename
 #define ForwardIterator typename
 #define BidirectionalIterator typename
 #define RandomAccessIterator typename
+
+#define Sorter typename
+#define Incrementable typename
+#define StrictWeakOrdering typename
+#define Generator typename
+#define BinaryOperation typename
+#define Sequence typename
+#define Predicate typename
+
+#define ValueType(I) typename std::iterator_traits<I>::value_type
+#define DifferenceType(I) typename std::iterator_traits<I>::difference_type
+#define IteratorCategory(I) typename std::iterator_traits<I>::iterator_category
 
 #define IteratorBasis typename
 
@@ -26,3 +44,5 @@ using Pointer = typename std::iterator_traits<I>::pointer;
 
 template <InputIterator I>
 using Reference = typename std::iterator_traits<I>::reference;
+
+
