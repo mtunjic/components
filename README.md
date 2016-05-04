@@ -1,6 +1,7 @@
-# STL Algorithms &amp; Iterator Adaptors
+## STL++ 
+ Algorithms &amp; Iterator Adaptors
 
-## Algorithms
+### Algorithms
 
 * split
 * find_all
@@ -11,12 +12,22 @@
 * find_last
 * remove_if_not 
 * keep_if
+* slide (by Sean Parent)
+* gather (by Sean Parent)
+* min_max (by A. Stepanov and I. Pohl)
 
-## Iterator Adaptors
+### Data Structures
+* tape
+* htable
+* grid
+* graph
+* dynamic_pqueue
+
+### Iterator Adaptors
 * numeric_range
 * step_range
 
-## Functors
+### Functors
 * conversion
 * square_root
 * vowel
