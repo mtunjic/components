@@ -9,11 +9,15 @@
 * find_all
 * random_iota
 * apply
+* find_all
+* find_if_n
+* find_if_n_backward
 * find_backward
 * find_if_backward
 * find_if_not_backward
 * remove_if_not 
 * remove_if_not_backward
+* copy_n (std stl fixed interface)
 * keep_if
 * slide (by Sean Parent)
 * gather (by Sean Parent)
