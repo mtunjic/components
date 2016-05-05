@@ -23,6 +23,11 @@
 #define BinaryOperation typename
 #define Sequence typename
 #define Predicate typename
+#define Integer typename
+#define BinaryInteger typename
+#define EuclideanDomain typename
+#define Semiregular typename
+#define Transformation typename
 
 #define ValueType(I) typename std::iterator_traits<I>::value_type
 #define DifferenceType(I) typename std::iterator_traits<I>::difference_type
