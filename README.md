@@ -18,6 +18,10 @@
 * slide (by Sean Parent)
 * gather (by Sean Parent)
 * min_max (by A. Stepanov and I. Pohl)
+* stein_gcd (by A. Stepanov)
+* extended_gcd (by A. Stepanov)
+* psort (hybrid, parallel and adaptive)
+* partial_bucketsort (hybrid with dual graphics cards)
 
 ### Data Structures
 * tape
