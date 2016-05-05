@@ -4,12 +4,13 @@
 ### Algorithms
 
 * split
+* random_range
 * find_all
 * random_iota
 * apply
-* rfind
-* rfind_n
-* find_last
+* find_backward
+* find_backward_if
+* find_backward_if_not
 * remove_if_not 
 * keep_if
 * slide (by Sean Parent)
