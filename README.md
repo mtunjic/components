@@ -9,9 +9,10 @@
 * random_iota
 * apply
 * find_backward
-* find_backward_if
-* find_backward_if_not
+* find_if_backward
+* find_if_not_backward
 * remove_if_not 
+* remove_if_not_backward
 * keep_if
 * slide (by Sean Parent)
 * gather (by Sean Parent)
