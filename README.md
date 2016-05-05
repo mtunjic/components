@@ -17,7 +17,7 @@
 * find_if_not_backward
 * remove_if_not 
 * remove_if_not_backward
-* copy_n (std stl fixed interface)
+* copy_n (fixed interface)
 * keep_if
 * slide (by Sean Parent)
 * gather (by Sean Parent)
