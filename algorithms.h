@@ -94,23 +94,17 @@ void apply(I first, I last, Function f)
 // random_range
 template <typename C, typename T>
 void random_range(C& c, T min, T max) {
-
-	random_range(std::begin(c), end(c), min, max);
-	
+	random_range(std::begin(c), end(c), min, max);	
 }
 
 template <typename C, typename T>
 void random_range(C& c, std::pair<T, T> range) {
-	
-	random_range(std::begin(c), end(c), range.first, range.second);
-	
+	random_range(std::begin(c), end(c), range.first, range.second);	
 }
 
 template <typename I, typename T>
 void random_range(I first, I last, std::pair<T, T> range) {
-	
 	random_range(first, last, range.first, range.second);
-	
 }
 
 template <typename I, typename T>
