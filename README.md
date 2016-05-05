@@ -4,7 +4,8 @@
 ### Algorithms
 
 * split
-* random_range
+* random
+* randomize
 * find_all
 * random_iota
 * apply
