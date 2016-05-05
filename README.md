@@ -51,6 +51,15 @@
 
 
 ``` cpp
+// slide
+std::array<int, 10> a10{9,0,1,4,4,0,7,7,8,0};
+std::cout << "Before gather: \n";
+print(a10);
+std::cout << "After we gather all less than 2: \n";
+auto insertPos = std::begin(a10) + 4;
+mt::gather(std::begin(a10), std::begin(a10)+10, insertPos, less_than<int>{2});
+print(a10);
+
 // random
 using card = int;
 std::array<card, 52> deck{};
