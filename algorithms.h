@@ -92,6 +92,9 @@ void apply(I first, I last, Function f)
 
 
 // random_range
+// Usage:
+// 	 std::vector<double> vec(12);
+//	 random_range(vec, 5.0, 0.5);
 template <typename C, typename T>
 void random_range(C& c, T min, T max) {
 	random_range(std::begin(c), end(c), min, max);	
