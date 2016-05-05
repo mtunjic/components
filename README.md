@@ -20,6 +20,8 @@
 
 ### Data Structures
 * tape
+* rope
+* slice
 * htable
 * grid
 * graph
