@@ -151,15 +151,49 @@ namespace mt {
 	
 	// gather by Sean Parent
 	template <BidirectionalIterator I, Predicate P>
-	auto gather(I first, I last, I pos, P pred) -> std::pair <I, I>
+	auto gather(I first, I last, I pos, P pred) -> std::pair<I, I>
 	{
 
 		return{ std::stable_partition(first, pos,
 																	[&](const ValueType(I)& x){ return !pred(x); }),
 			std::stable_partition(pos, last, pred) };
 	}
+	
 
+	// swap_ranges_n by Stepanov
+	template <ForwardIterator I, Integer N>
+ 	auto swap_ranges_n(I first1, I first2, N n) -> std::pair<I, I>
+	{
+		while (n) {
+			std::swap(*first1, *first2);
+			++first1;
+			++first2;
+			--n;
+		}
+		return {first1, first2};
+	}
+	
+	// reverse by Stepanov
+	// reverse that works on forward iterators and uses not more than O(log(n)) of
+	// additional storage and not more than O(nlog(n)) steps, where n is the size of the range
+	template <ForwardIterator I, Integer N>
+	I reverse_n(I first, N n)
+	{
+		if (n == 0) return first;
+		if (n == 1) return ++first;
+		
+		I middle = reverse_n(first, n/2);
+		if (n % 2 == 1) ++middle;
+		I result = reverse_n(middle, n/2);
+		swap_ranges_n(first, middle, n/2);
+		return result;
+	}
 
+	template <ForwardIterator I>
+	void reverse(I first, I last)
+	{
+		reverse_n(first, std::distance(first, last));
+	}
 
 
 
