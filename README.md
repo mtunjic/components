@@ -49,34 +49,48 @@ Algorithms &amp; Iterator Adaptors
 * root
 * norm
 
+```sh
+> c++ -O3 -std=c++14 main.cpp -o main && ./main
+```
 
 ``` cpp
 // gather
 std::array<int, 10> a10{9,0,1,4,4,0,7,7,8,0};
-std::cout << "Before gather: \n";
-print(a10);
-std::cout << "After we gather all less than 2: \n";
 auto insertPos = std::begin(a10) + 4;
+
 mt::gather(std::begin(a10), std::begin(a10)+10, insertPos, less_than<int>{2});
-print(a10);
+
+/*
+	Before gather:
+  	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
+  	After we gather all less than 2:
+  	[ 9, 4, 0, 1, 0, 0, 4, 7, 7, 8 ]
+ */
 
 // remove_if_not
 std::vector<int> v1 {9,0,1,4,4,0,7,7,8,0};
-std::cout << "Before remove: \n";
-print(v1);
 // mark for deletion
 auto p = mt::remove_if_not(std::begin(v1), std::end(v1), less_than<int>{5});
 v1.erase(p, v1.end());
-std::cout << "After remove not less than 5: \n";
-print(v1);
+
+/* 
+	Before remove:
+	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
+	After remove not less than 5:
+	[ 0, 1, 4, 4, 0, 0 ]
+*/
 
 // keep_if
 std::vector<int> v2 {9,0,1,4,4,0,7,7,8,0};
-std::cout << "Before: \n";
-print(v2);
-std::cout << "After keep all less than 8: \n";
 mt::keep_if(v2, less_than<int>{8});
-print(v2);
+
+/*
+	Before:
+	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
+	After keep all less than 8:
+	[ 0, 1, 4, 4, 0, 7, 7, 0 ]
+*/
+
 
 // random
 using card = int;
@@ -88,12 +102,12 @@ print(deck);
 
 int rInt = mt::pick_a_number(5, 15);
 double rDouble = mt::pick_a_number(0.5, 5.0);
-std::cout << "Random int: " << rInt << "\nRandom double: " << rDouble << '\n';
+
 
 // random range
 std::vector<double> rd(15);
 mt::random(rd, 5.0, 0.5); // gen radnom range with min and max limit
-print(rd);
+// [ 5.14483, 4.66518, 4.48297, 5.51647, 4.95101 ]
 
 // split
 std::string line {"man,meal,moon;fat,food,feel;cat,coat,cook;love,leg,lunch"};
@@ -105,8 +119,15 @@ std::list<std::string> list_words;
 mt::split(line, ";", vec_words);
 mt::split(line, ",;.", list_words);
 
-print(vec_words);
-print(list_words);
+/*
+
+	[ man,meal,moon, 
+	fat,food,feel, 
+	cat,coat,cook, 
+	love,leg,lunch ]
+
+	[ man, meal, moon, fat, food, feel, cat, coat, cook, love, leg, lunch ]
+*/
 
 ``` 
 

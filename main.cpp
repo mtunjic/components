@@ -14,18 +14,7 @@
 
 int main(int argc, const char * argv[]) {
 	
-	
-	// rotate_by
-	std::cout << "TEST ROTATE_BY: \n"
-	<< "=========================\n";
-	std::vector<int> v3 {1,1,2,2,2,3,3,4,4,4};
-	std::cout << "Before: \n";
-	print(v3);
-	std::cout << "After keep all less than 8: \n";
-	auto p3 = mt::rotate_right_n(v3.begin(), v3.end(), 4);
-	print(v3);
-	std::cout << "=========================\n\n\n";
-	
+		
 	// slide
 	std::cout << "TEST SLIDE: \n"
 	<< "=========================\n";
@@ -68,7 +57,7 @@ int main(int argc, const char * argv[]) {
 	
 	// random
 	std::cout << "TEST RANDOMIZE: \n"
-						<< "=========================\n";
+			  << "=========================\n";
 	using card = int;
 	std::array<card, 52> deck{};
 	std::iota(begin(deck), end(deck), 0);
@@ -85,8 +74,8 @@ int main(int argc, const char * argv[]) {
 	
 	// test random range
 	std::cout << "TEST RANDOM RANGE: \n"
-						<< "=========================\n";
-	std::vector<double> rd(15);
+			  << "=========================\n";
+	std::vector<double> rd(5);
 	mt::random(rd, 5.0, 0.5); // gen radnom range with min and max limit
 	print(rd);
 	std::cout << "=========================\n\n\n";
@@ -95,7 +84,7 @@ int main(int argc, const char * argv[]) {
 	
 	// test split
 	std::cout << "TEST SPLIT: \n"
-						<< "=========================\n";
+			  << "=========================\n";
 	std::string line {"man,meal,moon;fat,food,feel;cat,coat,cook;love,leg,lunch"};
 	
 	// split string to any container
