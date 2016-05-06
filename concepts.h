@@ -23,6 +23,7 @@
 #define BinaryOperation typename
 #define Sequence typename
 #define Predicate typename
+#define UnaryPredicate typename
 #define Integer typename
 #define BinaryInteger typename
 #define EuclideanDomain typename
@@ -49,5 +50,3 @@ using Pointer = typename std::iterator_traits<I>::pointer;
 
 template <InputIterator I>
 using Reference = typename std::iterator_traits<I>::reference;
-
-

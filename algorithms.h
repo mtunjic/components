@@ -88,22 +88,21 @@ namespace mt {
 			++first;
 		}
 	}
-
+	
 	// find_backward
 	// (reverse neighbor find) searches a sequential data structure from end to beginning.
-	template<InputIterator T>
-	T find_backward(T first, T last, const X& x)
+	template<InputIterator I, typename T>
+	I find_backward(I first, I last, const T& x)
 	{
 		while (last != first && last[-1] != x)
 			--last;
 		return last;
 	}
-
+	
 	// random_range
 	// Usage:
 	// 	 std::vector<double> vec(12);
 	//	 random_range(vec, 5.0, 0.5);
-	
 	template <InputIterator I, Number T>
 	void random(I first, I last, T min, T max) {
 		
@@ -115,70 +114,9 @@ namespace mt {
 		
 	}
 	
-	template <InputIterator I, Number T>
-	void random(I first, I last, std::pair<T, T> range) {
-		random(first, last, range.first, range.second);
-	}
-	
-	template <InputIterator I, Number T>
-	void random(C& c, T min, T max) {
-		random(std::begin(c), end(c), min, max);
-	}
-
-	template <InputIterator I, Number T>
-	void random(C& c, std::pair<T, T> range) {
-		random(std::begin(c), end(c), range.first, range.second);
-	}
-
-
-	std::default_random_engine& global_urng() {
-		static std::default_random_engine  u{};
-		return u;
-	}
-	
-	void randomize() {
-		static std::random_device  rd{};
-		global_urng().seed(rd());
-		
-	}
-	
-	template<typename I>
-	void randomize(I first, I last) {
-		randomize();
-		std::shuffle(first, last, global_urng());
-	}
-	
-	template<typename C>
-	void randomize(C& c) {
-		randomize(std::begin(c), std::end(c));
-	}
-	
-	
-	template<typename T>
-	T pick_a_number(T from, T thru) {
-		static std::normal_distribution<>  d{};
-		using  parm_t  = decltype(d)::param_type;
-		return d(global_urng(), parm_t{from, thru});
-	}
-	
-
-	// find_all
-	template<typename T>
-	using Iterator = typename T::iterator; 
-	template<typename C, typename V>
-	std::vector<Iterator<C>> find_all(C& c, V v) { 
-		std::vector<Iterator<C>> result;
-		for (auto p = c.begin(); p != c.end(); ++p)
-			if (*p == v)
-				result.emplace_back(p);
-		return result;
-	}
-	
-
-	
 	// find_if_n
 	// For counted ranges, formed by specifying a position and a count of elements n.
-	template <InputIterator I, Number N, Predicate P>
+	template <InputIterator I, Number N, UnaryPredicate P>
 	auto find_if_n(I first, N n, P p) -> std::pair<I, N>
 	{
 		while (n && !p(*first)) {
@@ -202,7 +140,6 @@ namespace mt {
 	}
 
 	
-	
 	// slide by Sean Parent
 	template <RandomAccessIterator I>
 	auto slide(I first, I last, I p) -> std::pair<I, I>
@@ -221,13 +158,71 @@ namespace mt {
 																	[&](const ValueType(I)& x){ return !pred(x); }),
 			std::stable_partition(pos, last, pred) };
 	}
-	
-	
-	
 
 
+
+
+
+	// ======================= EXT ======================================
+	// find_all
+	template<typename T>
+	using Iterator = typename T::iterator;
+	template<typename C, typename V>
+	std::vector<Iterator<C>> find_all(C& c, V v) {
+		std::vector<Iterator<C>> result;
+		for (auto p = c.begin(); p != c.end(); ++p)
+			if (*p == v)
+				result.emplace_back(p);
+		return result;
+	}
+
+	// random
+	template <Sequence S, Number T>
+	void random(S first, S last, std::pair<T, T> range) {
+		random(first, last, range.first, range.second);
+	}
+
+	template <Sequence S, Number T>
+	void random(S& s, T min, T max) {
+		random(std::begin(s), end(s), min, max);
+	}
+
+	template <Sequence S, Number T>
+	void random(S& s, std::pair<T, T> range) {
+		random(std::begin(s), end(s), range.first, range.second);
+	}
+
+
+	std::default_random_engine& global_urng() {
+		static std::default_random_engine  u{};
+		return u;
+	}
+
+	void randomize() {
+		static std::random_device  rd{};
+		global_urng().seed(rd());
+		
+	}
+
+	template<typename I>
+	void randomize(I first, I last) {
+		randomize();
+		std::shuffle(first, last, global_urng());
+	}
+
+	template<typename C>
+	void randomize(C& c) {
+		randomize(std::begin(c), std::end(c));
+	}
+
+
+	template<typename T>
+	T pick_a_number(T from, T thru) {
+		static std::normal_distribution<>  d{};
+		using  parm_t  = decltype(d)::param_type;
+		return d(global_urng(), parm_t{from, thru});
+	}
 
 }
-
 
 #endif

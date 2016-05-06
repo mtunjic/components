@@ -28,6 +28,20 @@ int main(int argc, const char * argv[]) {
 	std::cout << "=========================\n\n\n";
 	
 	
+	// find_backward
+	std::cout << "TEST FIND_BACKWARD: \n"
+	<< "=========================\n";
+	std::vector<int> arr{1,2,3,4,5,6,7,8,9,10};
+	print(arr);
+	std::cout << "Find 7 backward: \n";
+	auto p7 = mt::find_backward(std::begin(arr), std::end(arr), 7);
+
+	
+	std::cout << *p7 << std::endl;
+	print(arr);
+	std::cout << "=========================\n\n\n";
+	
+	
 	// remove_if_not
 	std::cout << "TEST REMOVE_IF_NOT: \n"
 	<< "=========================\n";
