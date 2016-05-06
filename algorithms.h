@@ -89,12 +89,22 @@ namespace mt {
 		}
 	}
 
+	// find_backward
+	// (reverse neighbor find) searches a sequential data structure from end to beginning.
+	template<InputIterator T>
+	T find_backward(T first, T last, const X& x)
+	{
+		while (beyond != first && last[-1] != x)
+			--last;
+		return last;
+	}
+
 	// random_range
 	// Usage:
 	// 	 std::vector<double> vec(12);
 	//	 random_range(vec, 5.0, 0.5);
 	
-	template <typename I, typename T>
+	template <InputIterator I, Number T>
 	void random(I first, I last, T min, T max) {
 		
 		std::random_device rnd_device;
@@ -105,17 +115,17 @@ namespace mt {
 		
 	}
 	
-	template <typename I, typename T>
+	template <InputIterator I, Number T>
 	void random(I first, I last, std::pair<T, T> range) {
 		random(first, last, range.first, range.second);
 	}
 	
-	template <typename C, typename T>
+	template <InputIterator I, Number T>
 	void random(C& c, T min, T max) {
 		random(std::begin(c), end(c), min, max);
 	}
 
-	template <typename C, typename T>
+	template <InputIterator I, Number T>
 	void random(C& c, std::pair<T, T> range) {
 		random(std::begin(c), end(c), range.first, range.second);
 	}
