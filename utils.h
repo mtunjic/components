@@ -1,3 +1,11 @@
+//
+//  ALGORITHMS.H
+//
+//
+//  Created by Marko Tunjic on 05/05/16.
+//  Copyright © 2016 Marko Tunjic. All rights reserved.
+//
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -12,8 +20,14 @@
 #include <list>
 #include <functional>
 
+#include <queue>
+#include <exception>
+#include <typeinfo>
+#include <stdexcept>
+#include "concepts.h"
+
 template <typename Container>
-void print(const Container& c, std::ostream& out = cout) {
+void print(const Container& c, std::ostream& out = std::cout) {
     if (c.empty()) {
         out << "(empty)";
     } else {
@@ -71,38 +85,31 @@ void sort(C& c, Pred p)
 
 // string / text
 template<typename T>
-string to_string(const T& t)
+std::string to_string(const T& t)
 {
-   ostringstream os;
-   os << t;
-   return os.str();
+	std::ostringstream os;
+	os << t;
+	return os.str();
 }
 
-struct bad_from_string : std::bad_cast { 
-  const char* what() const override
-   {
-     return "bad cast from string";
-   }
-};
 
-// int i = FromString<int>(s);
-// std::string str = ToString(i);
+
 template<typename T>
-T from_string(const string& s)
+T from_string(const std::string& s)
 {
-  istringstream is {s};
-  T t;
-  if (!(is >> t)) throw bad_from_string{};
-  return t;
+	std::istringstream is {s};
+	T t;
+	if (!(is >> t)) throw std::bad_cast{};
+	return t;
 }
 
 
 inline void wait()
 {
-  cin.clear();
-  cout << "Please enter to exit\n";
+  std::cin.clear();
+  std::cout << "Please enter to exit\n";
   char ch;
-  cin >> ch;
+  std::cin >> ch;
   return;
 }
 

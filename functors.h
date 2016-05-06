@@ -1,10 +1,18 @@
+//
+//  ALGORITHMS.H
+//
+//
+//  Created by Marko Tunjic on 05/05/16.
+//  Copyright © 2016 Marko Tunjic. All rights reserved.
+//
+
 #include "concepts.h"
 
 bool vowel(char c) {
   return std::strchr("aeiouAEIOU", c) != 0;
 }
 
- class digit : public unary_function<char, bool> {
+ class digit : public std::unary_function<char, bool> {
   public:
     bool operator() (char c) const { return ::isdigit(c) != 0; }
 };
