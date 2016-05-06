@@ -94,7 +94,7 @@ namespace mt {
 	template<InputIterator T>
 	T find_backward(T first, T last, const X& x)
 	{
-		while (beyond != first && last[-1] != x)
+		while (last != first && last[-1] != x)
 			--last;
 		return last;
 	}
