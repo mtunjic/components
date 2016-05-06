@@ -18,6 +18,7 @@ Algorithms &amp; Iterator Adaptors
 * remove_if_not 
 * remove_if_not_backward
 * reverse_n (by A. Stepanov)
+* reverse_n (recursive, for foward iter)
 * reverse_until
 * swap_ranges_n
 * copy_n (fixed interface)

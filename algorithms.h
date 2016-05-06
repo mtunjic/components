@@ -21,15 +21,15 @@
 
 
 namespace mt {
-
+	
 	
 	template <Integer N>
 	bool odd(N n) { return bool(n & 0x1); }
-
+	
 	template <Integer N>
 	N half(N n) { return n >> 1; }
-
-
+	
+	
 	// random_iota
 	template <ForwardIterator I>
 	void iota(I first, I last) {
@@ -37,19 +37,19 @@ namespace mt {
 	}
 	
 	template <RandomAccessIterator I>
-		void random_iota(I first, I last) {
+	void random_iota(I first, I last) {
 		iota(first, last);
 		std::random_shuffle(first, last);
 	}
-
+	
 	// split
 	template <typename T, typename C>
 	void split(const std::basic_string<T>& s, std::string separators, C& c) {
-
+		
 		size_t n = s.length();
 		// find non-separtor chras
 		auto start = s.find_first_not_of(separators, 0);
-
+		
 		while (start < n) {  // until we have non separator charceter
 			// find end of current word
 			auto stop = s.find_first_of(separators, start);
@@ -61,13 +61,13 @@ namespace mt {
 			
 		}
 	}
-
+	
 	// remove_if_not
 	template <ForwardIterator I, Predicate P>
 	I remove_if_not(I first, I last, P pred)
 	{
-			return std::remove_if(first, last,
-														[&](const ValueType(I)& x){ return !pred(x); });
+		return std::remove_if(first, last,
+													[&](const ValueType(I)& x){ return !pred(x); });
 	}
 	
 	// keep_if
@@ -78,7 +78,7 @@ namespace mt {
 		s.erase(p, std::end(s));
 	}
 	
-
+	
 	// apply
 	template<ForwardIterator I, class Function>
 	void apply(I first, I last, Function f)
@@ -138,7 +138,7 @@ namespace mt {
 		}
 		return {first, dest};
 	}
-
+	
 	
 	// slide by Sean Parent
 	template <RandomAccessIterator I>
@@ -153,50 +153,60 @@ namespace mt {
 	template <BidirectionalIterator I, Predicate P>
 	auto gather(I first, I last, I pos, P pred) -> std::pair<I, I>
 	{
-
-		return{ std::stable_partition(first, pos,
-																	[&](const ValueType(I)& x){ return !pred(x); }),
+		
+		return{ std::stable_partition(first, pos, 
+			[&](const ValueType(I)& x){ return !pred(x); }),
 			std::stable_partition(pos, last, pred) };
 	}
 	
-
+	
 	// swap_ranges_n by Stepanov
-	template <ForwardIterator I, Integer N>
- 	auto swap_ranges_n(I first1, I first2, N n) -> std::pair<I, I>
+	template <ForwardIterator I0, ForwardIterator I1, Integer N>
+	auto swap_ranges_n(I0 first0, I1 first1, N n) -> std::pair<I0, I1>
 	{
-		while (n) {
-			std::swap(*first1, *first2);
-			++first1;
-			++first2;
+		while (n != N(0)) {
+			std::swap(*first0++, *first1++);
 			--n;
 		}
-		return {first1, first2};
+		return {first0, first1};
 	}
 	
 	// reverse by Stepanov
 	// reverse that works on forward iterators and uses not more than O(log(n)) of
 	// additional storage and not more than O(nlog(n)) steps, where n is the size of the range
+	// which came in handy when we want to reverse ForwardIterator
 	template <ForwardIterator I, Integer N>
 	I reverse_n(I first, N n)
 	{
 		if (n == 0) return first;
 		if (n == 1) return ++first;
 		
-		I middle = reverse_n(first, n/2);
-		if (n % 2 == 1) ++middle;
-		I result = reverse_n(middle, n/2);
-		swap_ranges_n(first, middle, n/2);
+		N h = half(n);
+		I middle = reverse_n(first, h);
+		if (odd(n)) ++middle;
+		I result = reverse_n(middle, h);
+		swap_ranges_n(first, middle, h);
 		return result;
 	}
-
+	
+	template <BidirectionalIterator I, Integer N>
+  	void reverse_n(I first, I last, N n)
+	{
+		n = half(n);
+		while (n-- > N(0)) {
+			std::swap(*first++, *--last);
+		}
+	}
+	
+	
 	template <ForwardIterator I>
 	void reverse(I first, I last)
 	{
 		reverse_n(first, std::distance(first, last));
 	}
-
-
-
+	
+	
+	
 	// ======================= EXT ======================================
 	// find_all
 	template<typename T>
@@ -209,54 +219,54 @@ namespace mt {
 				result.emplace_back(p);
 		return result;
 	}
-
+	
 	// random
 	template <Sequence S, Number T>
 	void random(S first, S last, std::pair<T, T> range) {
 		random(first, last, range.first, range.second);
 	}
-
+	
 	template <Sequence S, Number T>
 	void random(S& s, T min, T max) {
 		random(std::begin(s), end(s), min, max);
 	}
-
+	
 	template <Sequence S, Number T>
 	void random(S& s, std::pair<T, T> range) {
 		random(std::begin(s), end(s), range.first, range.second);
 	}
-
-
+	
+	
 	std::default_random_engine& global_urng() {
 		static std::default_random_engine  u{};
 		return u;
 	}
-
+	
 	void randomize() {
 		static std::random_device  rd{};
 		global_urng().seed(rd());
 		
 	}
-
+	
 	template<typename I>
 	void randomize(I first, I last) {
 		randomize();
 		std::shuffle(first, last, global_urng());
 	}
-
+	
 	template<typename C>
 	void randomize(C& c) {
 		randomize(std::begin(c), std::end(c));
 	}
-
-
+	
+	
 	template<typename T>
 	T pick_a_number(T from, T thru) {
 		static std::normal_distribution<>  d{};
 		using  parm_t  = decltype(d)::param_type;
 		return d(global_urng(), parm_t{from, thru});
 	}
-
+	
 }
 
 #endif
