@@ -111,12 +111,12 @@ auto insertPos = std::begin(a10) + 4;
 
 mt::gather(std::begin(a10), std::begin(a10)+10, insertPos, less_than<int>{2});
 
-/- [ ]
+/*
 	Before gather:
   	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
   	After we gather all less than 2:
   	[ 9, 4, 0, 1, 0, 0, 4, 7, 7, 8 ]
- - [ ]/
+*/
 
 // remove_if_not
 std::vector<int> v1 {9,0,1,4,4,0,7,7,8,0};
@@ -124,23 +124,23 @@ std::vector<int> v1 {9,0,1,4,4,0,7,7,8,0};
 auto p = mt::remove_if_not(std::begin(v1), std::end(v1), less_than<int>{5});
 v1.erase(p, v1.end());
 
-/- [ ] 
+/* 
 	Before remove:
 	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
 	After remove not less than 5:
 	[ 0, 1, 4, 4, 0, 0 ]
-- [ ]/
+*/
 
 // keep_if
 std::vector<int> v2 {9,0,1,4,4,0,7,7,8,0};
 mt::keep_if(v2, less_than<int>{8});
 
-/- [ ]
+/*
 	Before:
 	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
 	After keep all less than 8:
 	[ 0, 1, 4, 4, 0, 7, 7, 0 ]
-- [ ]/
+*/
 
 // stable_partition_position
 int  a[] = { 1, 2, 3, 4, 5, 5, 4, 3, 2, 1 }; 
@@ -185,7 +185,7 @@ std::list<std::string> list_words;
 mt::split(line, ";", vec_words);
 mt::split(line, ",;.", list_words);
 
-/- [ ]
+/*
 
 	[ man,meal,moon, 
 	fat,food,feel, 
@@ -193,7 +193,7 @@ mt::split(line, ",;.", list_words);
 	love,leg,lunch ]
 
 	[ man, meal, moon, fat, food, feel, cat, coat, cook, love, leg, lunch ]
-- [ ]/
+*/
 
 ``` 
 
