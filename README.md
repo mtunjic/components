@@ -5,7 +5,6 @@ Algorithms &amp; Iterator Adaptors
 
 * split
 * random
-* randomize
 * find_all
 * random_iota
 * apply
@@ -24,7 +23,7 @@ Algorithms &amp; Iterator Adaptors
 * swap_ranges_n
 * partition_point_n
 * copy_n (fixed interface)
-* keep_if
+* keep_if, delete_if
 * slide (by Sean Parent)
 * gather (by Sean Parent)
 * min_max (by A. Stepanov and I. Pohl)
@@ -33,9 +32,17 @@ Algorithms &amp; Iterator Adaptors
 * psort (hybrid, parallel and adaptive)
 * partial_bucketsort (hybrid with dual graphics cards)
 * zip, unzip, zip_with
+* concat
+* transpose
+* intercalate
+* group
+* lines, unlines
+* words, unwords
+* starts_with, end_with
 * shift_by
 * border
 * matches (Knuth–Morris–Pratt)
+* sortsums (Lambert)
 
 ### Data Structures
 * tape
@@ -47,8 +54,8 @@ Algorithms &amp; Iterator Adaptors
 * dynamic_pqueue
 
 ### Iterator Adaptors
-* numeric_range
-* step_range
+* numeric_iterator
+* step_iterator
 
 ### Functors
 * conversion
@@ -58,6 +65,13 @@ Algorithms &amp; Iterator Adaptors
 * cube_root_pow
 * root
 * norm
+
+### Utils
+* to_map, to_list, to_array
+* stopwatch
+* print_range
+* digit_sum
+* randomize, pick_a_number
 
 ```sh
 > c++ -O3 -std=c++14 main.cpp -o main && ./main
