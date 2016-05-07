@@ -170,7 +170,19 @@ namespace mt {
 	    return std::rotate(stable_partition_position(first, middle, p),
 	                  		middle,
 	                  		stable_partition_position(middle, last, p));
-	  }
+	}
+
+	// sort_subrange
+	template <RandomAccessIterator I0, RandomAccessIterator I1>
+	void sort_subrange(I0 first0, I0 last0, I1 first1, I1 last1)
+	{
+    	if (first1 == last1) return;
+    	if (first1 != first0) {
+        	std::nth_element(first0, first1, last0);
+			++first1; 
+		}
+    	std::partial_sort(first1, last1, last0);
+	}
 	
 	// partition_point_n by Stepanov
 	template <InputIterator I, Integral N, UnaryPredicate P>
