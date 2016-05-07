@@ -9,6 +9,7 @@ Algorithms &amp; Iterator Adaptors
 * find_all
 * random_iota
 * apply
+* apply_until
 * find_all
 * find_if_n
 * find_if_n_backward
@@ -31,6 +32,10 @@ Algorithms &amp; Iterator Adaptors
 * extended_gcd (by A. Stepanov)
 * psort (hybrid, parallel and adaptive)
 * partial_bucketsort (hybrid with dual graphics cards)
+* zip, unzip, zip_with
+* shift_by
+* border
+* matches (Knuth–Morris–Pratt)
 
 ### Data Structures
 * tape
