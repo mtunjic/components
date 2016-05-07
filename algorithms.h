@@ -227,11 +227,11 @@ namespace mt {
 
 
 	template <BidirectionalIterator I> 
-	auto reverse_until(I first , I middle, I last) -> std::pair<I ,I>
+	auto reverse_until(I first , I middle, I last) -> std::pair<I,I>
 	{
 		while ( first != middle && middle != last ) {
 			--last;
-			swap(*first, *last);
+			std::swap(*first, *last);
 			++first;
 		}
 		return {first , last};
