@@ -27,7 +27,7 @@ Algorithms &amp; Iterator Adaptors
 - [x] copy_n_with_buffer
 - [x] keep_if, delete_if
 - [x] slide (by Sean Parent)
-- [x] gather (by Sean Parent)
+- [x] gather (Marshall Clow)
 - [ ] min_max (by A. Stepanov and I. Pohl)
 - [ ] stein_gcd (by A. Stepanov)
 - [ ] extended_gcd (by A. Stepanov)
@@ -88,6 +88,7 @@ Algorithms &amp; Iterator Adaptors
 - [ ] remove_block
 - [ ] has_prefix, has_suffix
 - [ ] is_digit
+- [ ] pluralize
 
 ### Utils
 - [ ] to_map, to_list, to_array

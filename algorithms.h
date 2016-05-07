@@ -149,7 +149,7 @@ namespace mt {
 		return { first, last };
 	}
 	
-	// gather by Sean Parent
+	// gather by Marshall Clow
 	template <BidirectionalIterator I, Predicate P>
 	auto gather(I first, I last, I pos, P pred) -> std::pair<I, I>
 	{
