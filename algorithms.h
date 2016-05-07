@@ -154,10 +154,32 @@ namespace mt {
 	auto gather(I first, I last, I pos, P pred) -> std::pair<I, I>
 	{
 		
-		return{ std::stable_partition(first, pos, 
-			[&](const ValueType(I)& x){ return !pred(x); }),
+		return{ std::stable_partition(first, pos,
+																	[&](const ValueType(I)& x){ return !pred(x); }),
 			std::stable_partition(pos, last, pred) };
 	}
+	
+	// partition_point_n by Stepanov
+	template <InputIterator I, Integral N, UnaryPredicate P>
+	I partition_point_n(I first, N n, P pred) {
+  	// precondition: is_partitioned_n(first, n, pred)
+  	while (n) {
+			
+			N half = half(n);
+			I middle = first;
+			
+			std::advance(middle, half);
+		
+			if (pred(*middle)) {
+				n = half;
+			} else {
+				n -= (half + 1);
+				first = ++middle;
+			}
+		}
+  	return first;
+	}
+
 	
 	
 	// swap_ranges_n by Stepanov
@@ -190,7 +212,7 @@ namespace mt {
 	}
 	
 	template <BidirectionalIterator I, Integer N>
-  	void reverse_n(I first, I last, N n)
+	void reverse_n(I first, I last, N n)
 	{
 		n = half(n);
 		while (n-- > N(0)) {

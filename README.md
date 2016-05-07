@@ -21,6 +21,7 @@ Algorithms &amp; Iterator Adaptors
 * reverse_n (recursive, for foward iter)
 * reverse_until
 * swap_ranges_n
+* partition_point_n
 * copy_n (fixed interface)
 * keep_if
 * slide (by Sean Parent)
