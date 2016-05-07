@@ -79,6 +79,7 @@ Algorithms &amp; Iterator Adaptors
 * gsub
 * to, from_string, to_string
 * remove_block
+* has_prefix, has_suffix
 
 ### Utils
 * to_map, to_list, to_array
