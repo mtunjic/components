@@ -143,8 +143,10 @@ mt::keep_if(v2, less_than<int>{8});
 - [ ]/
 
 // stable_partition_position
-int a[]={1,2,3,4,5,5,4,3,2,1}; 
-bool b[] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 };
+int  a[] = { 1, 2, 3, 4, 5, 5, 4, 3, 2, 1 }; 
+bool b[] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 }; // mask for every even 
+
+// divide the even(upfront) and odd(at the end) numbers 
 auto pos = mt::stable_partition_position(std::begin(a), std::end(a), [&](auto i) {
 	return *(std::begin(b) + (i - std::begin(a)));
 });
