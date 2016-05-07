@@ -56,10 +56,12 @@ Algorithms &amp; Iterator Adaptors
 - [ ] grid
 - [ ] graph
 - [ ] dynamic_pqueue
+- [ ] quadtree
 
 ### Iterator Adaptors
 - [ ] numeric_iterator
 - [ ] step_iterator
+- [ ] edge_iterator
 
 ### Functors
 - [x] conversion
