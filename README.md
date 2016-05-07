@@ -5,7 +5,7 @@ Algorithms &amp; Iterator Adaptors
 
 * split
 * random
-* find_all
+* slice
 * random_iota
 * apply
 * apply_until
@@ -24,6 +24,7 @@ Algorithms &amp; Iterator Adaptors
 * swap_ranges_n
 * partition_point_n
 * copy_n (fixed interface)
+* copy_n_with_buffer
 * keep_if, delete_if
 * slide (by Sean Parent)
 * gather (by Sean Parent)
