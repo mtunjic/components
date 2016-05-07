@@ -142,7 +142,7 @@ mt::keep_if(v2, less_than<int>{8});
 	[ 0, 1, 4, 4, 0, 7, 7, 0 ]
 - [ ]/
 
-// stable_partition_position by Sean Parent
+// stable_partition_position
 int a[]={1,2,3,4,5,5,4,3,2,1}; 
 bool b[] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 };
 auto pos = mt::stable_partition_position(std::begin(a), std::end(a), [&](auto i) {
@@ -154,7 +154,6 @@ std::cout << "^ ";
 for (auto f = pos, l = std::end(a); f != l; ++f) 
 	std::cout << *f << " ";
 std::cout << std::endl;
-
 // 2 4 4 2 ^ 1 3 5 5 3 1
 
 // random
