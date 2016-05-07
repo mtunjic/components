@@ -68,6 +68,18 @@ Algorithms &amp; Iterator Adaptors
 * root
 * norm
 
+### String Utils
+* trim, trim_left, trim_right
+* left_pad, right_pad, center
+* capitalize, to_lower, to_title, to_upper
+* to_chars
+* chop, chomp
+* count, repeat
+* replace, reverse
+* gsub
+* to, from_string, to_string
+* remove_block
+
 ### Utils
 * to_map, to_list, to_array
 * stopwatch
@@ -75,7 +87,7 @@ Algorithms &amp; Iterator Adaptors
 * digit_sum
 * randomize, pick_a_number
 * fast_erase
-* from_string, to_string
+* wait
 
 ```sh
 > c++ -O3 -std=c++14 main.cpp -o main && ./main
