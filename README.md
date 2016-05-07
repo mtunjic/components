@@ -34,7 +34,10 @@ Algorithms &amp; Iterator Adaptors
 - [ ] extended_gcd (by A. Stepanov)
 - [ ] psort (hybrid, parallel and adaptive)
 - [ ] partial_bucketsort (hybrid with dual graphics cards)
-- [ ] zip, unzip, zip_with
+- [ ] zip, unzip, zip_with, zip_n
+- [ ] skip, skip_while 
+- [ ] take, take_while
+- [ ] pairwise 
 - [ ] concat
 - [ ] transpose
 - [ ] intercalate
