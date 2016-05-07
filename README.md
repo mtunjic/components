@@ -46,6 +46,7 @@ Algorithms &amp; Iterator Adaptors
 - [ ] border
 - [ ] matches (Knuth–Morris–Pratt)
 - [ ] sortsums (Lambert)
+- [x] sort_subrange
 
 ### Data Structures
 - [ ] tape
