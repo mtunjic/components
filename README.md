@@ -23,6 +23,7 @@ Algorithms &amp; Iterator Adaptors
 - [x] reverse_n_with_buffer
 - [x] swap_ranges_n
 - [x] partition_point_n
+- [x] stable_partition_position
 - [x] copy_n (fixed interface)
 - [x] copy_n_with_buffer
 - [x] keep_if, delete_if
@@ -141,6 +142,20 @@ mt::keep_if(v2, less_than<int>{8});
 	[ 0, 1, 4, 4, 0, 7, 7, 0 ]
 - [ ]/
 
+// stable_partition_position by Sean Parent
+int a[]={1,2,3,4,5,5,4,3,2,1}; 
+bool b[] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 };
+auto pos = mt::stable_partition_position(std::begin(a), std::end(a), [&](auto i) {
+	return *(std::begin(b) + (i - std::begin(a)));
+});
+for (auto f = std::begin(a), l = pos; f != l; ++f) 
+	std::cout << *f << " ";
+std::cout << "^ ";
+for (auto f = pos, l = std::end(a); f != l; ++f) 
+	std::cout << *f << " ";
+std::cout << std::endl;
+
+// 2 4 4 2 ^ 1 3 5 5 3 1
 
 // random
 using card = int;

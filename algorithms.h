@@ -158,6 +158,19 @@ namespace mt {
 			[&](const ValueType(I)& x){ return !pred(x); }),
 			std::stable_partition(pos, last, pred) };
 	}
+
+	// stable_partition_position by Sean Parent
+	template <InputIterator I, UnaryPredicate P>
+	auto stable_partition_position(I first, I last, P p) -> I
+	{
+	    auto n = last - first;
+	    if (n == 0) return first;
+	    if (n == 1) return first + p(first);
+	    I middle = first + half(n);
+	    return std::rotate(stable_partition_position(first, middle, p),
+	                  		middle,
+	                  		stable_partition_position(middle, last, p));
+	  }
 	
 	// partition_point_n by Stepanov
 	template <InputIterator I, Integral N, UnaryPredicate P>

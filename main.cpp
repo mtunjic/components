@@ -62,6 +62,21 @@ int main(int argc, const char * argv[]) {
 	print(v2);
 	std::cout << "=========================\n\n\n";
 
+	// stable_partition_position
+	int a[]={1,2,3,4,5,5,4,3,2,1}; 
+	bool b[] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 };
+	auto pos = mt::stable_partition_position(std::begin(a), std::end(a), [&](auto i) {
+    	return *(std::begin(b) + (i - std::begin(a)));
+	});
+	for (auto f = std::begin(a), l = pos; f != l; ++f) 
+		std::cout << *f << " ";
+	std::cout << "^ ";
+	for (auto f = pos, l = std::end(a); f != l; ++f) 
+		std::cout << *f << " ";
+	std::cout << std::endl;
+
+	// 2 4 4 2 ^ 1 3 5 5 3 1
+
 	
 	
 	// random
