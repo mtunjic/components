@@ -3,92 +3,100 @@ Algorithms &amp; Iterator Adaptors
 
 ### Algorithms
 
-* split
-* random
-* slice
-* random_iota
-* apply
-* apply_until
-* find_all
-* find_if_n
-* find_if_n_backward
-* find_backward
-* find_if_backward
-* find_if_not_backward
-* remove_if_not 
-* remove_if_not_backward
-* reverse_n (by A. Stepanov)
-* reverse_n (recursive, for foward iter)
-* reverse_until
-* reverse_n_with_buffer
-* swap_ranges_n
-* partition_point_n
-* copy_n (fixed interface)
-* copy_n_with_buffer
-* keep_if, delete_if
-* slide (by Sean Parent)
-* gather (by Sean Parent)
-* min_max (by A. Stepanov and I. Pohl)
-* stein_gcd (by A. Stepanov)
-* extended_gcd (by A. Stepanov)
-* psort (hybrid, parallel and adaptive)
-* partial_bucketsort (hybrid with dual graphics cards)
-* zip, unzip, zip_with
-* concat
-* transpose
-* intercalate
-* group
-* lines, unlines
-* words, unwords
-* starts_with, end_with
-* shift_by
-* border
-* matches (Knuth–Morris–Pratt)
-* sortsums (Lambert)
+- [x] split
+- [x] random
+- [ ] slice
+- [x] random_iota
+- [x] apply
+- [ ] apply_until
+- [x] find_all
+- [x] find_if_n
+- [ ] find_if_n_backward
+- [x] find_backward
+- [ ] find_if_backward
+- [ ] find_if_not_backward
+- [x] remove_if_not 
+- [ ] remove_if_not_backward
+- [x] reverse_n (by A. Stepanov)
+- [x] reverse_n (recursive, for foward iter)
+- [x] reverse_until
+- [x] reverse_n_with_buffer
+- [x] swap_ranges_n
+- [x] partition_point_n
+- [x] copy_n (fixed interface)
+- [x] copy_n_with_buffer
+- [x] keep_if, delete_if
+- [x] slide (by Sean Parent)
+- [x] gather (by Sean Parent)
+- [ ] min_max (by A. Stepanov and I. Pohl)
+- [ ] stein_gcd (by A. Stepanov)
+- [ ] extended_gcd (by A. Stepanov)
+- [ ] psort (hybrid, parallel and adaptive)
+- [ ] partial_bucketsort (hybrid with dual graphics cards)
+- [ ] zip, unzip, zip_with
+- [ ] concat
+- [ ] transpose
+- [ ] intercalate
+- [ ] group
+- [ ] lines, unlines
+- [ ] words, unwords
+- [ ] starts_with, end_with
+- [ ] shift_by
+- [ ] border
+- [ ] matches (Knuth–Morris–Pratt)
+- [ ] sortsums (Lambert)
 
 ### Data Structures
-* tape
-* rope
-* slice
-* htable
-* grid
-* graph
-* dynamic_pqueue
+- [ ] tape
+- [ ] rope
+- [ ] slice
+- [ ] htable
+- [ ] grid
+- [ ] graph
+- [ ] dynamic_pqueue
 
 ### Iterator Adaptors
-* numeric_iterator
-* step_iterator
+- [ ] numeric_iterator
+- [ ] step_iterator
 
 ### Functors
-* conversion
-* square_root
-* vowel
-* multiplies
-* cube_root_pow
-* root
-* norm
+- [x] conversion
+- [x] square_root
+- [x] vowel
+- [x] multiplies
+- [x] divides
+- [x] cube_root_pow
+- [x] root
+- [x] norm
+- [x] digit
+- [x] plus
+- [x] minimum
+- [x] less_than
+- [x] greater_than
 
 ### String Utils
-* trim, trim_left, trim_right
-* left_pad, right_pad, center
-* capitalize, to_lower, to_title, to_upper
-* to_chars
-* chop, chomp
-* count, repeat
-* replace, reverse
-* gsub
-* to, from_string, to_string
-* remove_block
-* has_prefix, has_suffix
+- [ ] trim, trim_left, trim_right
+- [ ] left_pad, right_pad, center
+- [ ] capitalize, to_lower, to_title, to_upper
+- [ ] to_chars
+- [ ] chop, chomp
+- [ ] count, repeat
+- [ ] replace, reverse
+- [ ] gsub
+- [ ] contains, contains_any
+- [ ] to, from_string, to_string
+- [ ] remove_block
+- [ ] has_prefix, has_suffix
+- [ ] is_digit
 
 ### Utils
-* to_map, to_list, to_array
-* stopwatch
-* print_range
-* digit_sum
-* randomize, pick_a_number
-* fast_erase
-* wait
+- [ ] to_map, to_list, to_array
+- [x] stopwatch
+- [x] print_range
+- [ ] digit_sum
+- [x] randomize, pick_a_number
+- [ ] fast_erase
+- [x] wait
 
 ```sh
 > c++ -O3 -std=c++14 main.cpp -o main && ./main
@@ -101,12 +109,12 @@ auto insertPos = std::begin(a10) + 4;
 
 mt::gather(std::begin(a10), std::begin(a10)+10, insertPos, less_than<int>{2});
 
-/*
+/- [ ]
 	Before gather:
   	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
   	After we gather all less than 2:
   	[ 9, 4, 0, 1, 0, 0, 4, 7, 7, 8 ]
- */
+ - [ ]/
 
 // remove_if_not
 std::vector<int> v1 {9,0,1,4,4,0,7,7,8,0};
@@ -114,23 +122,23 @@ std::vector<int> v1 {9,0,1,4,4,0,7,7,8,0};
 auto p = mt::remove_if_not(std::begin(v1), std::end(v1), less_than<int>{5});
 v1.erase(p, v1.end());
 
-/* 
+/- [ ] 
 	Before remove:
 	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
 	After remove not less than 5:
 	[ 0, 1, 4, 4, 0, 0 ]
-*/
+- [ ]/
 
 // keep_if
 std::vector<int> v2 {9,0,1,4,4,0,7,7,8,0};
 mt::keep_if(v2, less_than<int>{8});
 
-/*
+/- [ ]
 	Before:
 	[ 9, 0, 1, 4, 4, 0, 7, 7, 8, 0 ]
 	After keep all less than 8:
 	[ 0, 1, 4, 4, 0, 7, 7, 0 ]
-*/
+- [ ]/
 
 
 // random
@@ -160,7 +168,7 @@ std::list<std::string> list_words;
 mt::split(line, ";", vec_words);
 mt::split(line, ",;.", list_words);
 
-/*
+/- [ ]
 
 	[ man,meal,moon, 
 	fat,food,feel, 
@@ -168,7 +176,7 @@ mt::split(line, ",;.", list_words);
 	love,leg,lunch ]
 
 	[ man, meal, moon, fat, food, feel, cat, coat, cook, love, leg, lunch ]
-*/
+- [ ]/
 
 ``` 
 
