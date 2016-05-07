@@ -20,6 +20,7 @@ Algorithms &amp; Iterator Adaptors
 * reverse_n (by A. Stepanov)
 * reverse_n (recursive, for foward iter)
 * reverse_until
+* reverse_n_with_buffer
 * swap_ranges_n
 * partition_point_n
 * copy_n (fixed interface)
@@ -72,6 +73,8 @@ Algorithms &amp; Iterator Adaptors
 * print_range
 * digit_sum
 * randomize, pick_a_number
+* fast_erase
+* from_string, to_string
 
 ```sh
 > c++ -O3 -std=c++14 main.cpp -o main && ./main

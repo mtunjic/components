@@ -236,6 +236,13 @@ namespace mt {
 		}
 		return {first , last};
 	}
+
+	template <ForwardIterator I, Integer N, BidirectionalIterator B>
+	I reverse_n_with_buffer(I f, N n, B buffer) {
+	    B buffer_end = copy_n(f, n, buffer);
+	    return std::reverse_copy(buffer, buffer_end, f);
+	}
+
 	
 	
 	
