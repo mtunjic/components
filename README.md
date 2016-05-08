@@ -26,7 +26,6 @@ Algorithms &amp; Iterator Adaptors
 - [x] stable_partition_position
 - [x] copy_n (fixed interface)
 - [x] copy_n_with_buffer
-- [x] keep_if, delete_if
 - [x] slide (by Sean Parent)
 - [x] gather (Marshall Clow)
 - [ ] min_max (by A. Stepanov and I. Pohl)
@@ -81,7 +80,13 @@ Algorithms &amp; Iterator Adaptors
 - [x] less_than
 - [x] greater_than
 
-### String Utils
+### Vector ext
+- [x] keep_if, keep_if_not
+- [x] delete_if, delete_if_not
+- [x] fill
+- [x] distinct
+
+### String ext
 - [ ] trim, trim_left, trim_right
 - [ ] left_pad, right_pad, center
 - [ ] capitalize, to_lower, to_title, to_upper
