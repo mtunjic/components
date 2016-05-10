@@ -51,5 +51,6 @@ namespace mt {
 	        ist.clear(ios_base::failbit); 
 	    }
 	}
+}
 
 #endif
