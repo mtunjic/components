@@ -33,60 +33,62 @@ namespace mt {
 	}
 
 	// inplace
-	static inline void trim_left(std::string &str)
+	static inline 
+	void trim_left(std::string &s)
 	{
-	    str.erase(0, str.find_first_not_of(' '));
+	    s.erase(0, s.find_first_not_of(' '));
 	}
 
 	static inline 
-	void trim_right(std::string &str)
+	void trim_right(std::string &s)
 	{
-	    str.erase(str.find_last_not_of(' ') + 1, std::string::npos);
+	    s.erase(s.find_last_not_of(' ') + 1, std::string::npos);
 	}
 
 	static inline 
-	std::string trim_left(const std::string &str)
+	std::string trim_left(const std::string &s)
 	{
-	    std::string::size_type pos = str.find_first_not_of(' ');
-	    if (pos == std::string::npos) return std::string();
+	    auto p = s.find_first_not_of(' ');
+	    if (p == std::string::npos) return std::string();
 
-	    return str.substr(pos, std::string::npos);
+	    return s.substr(p, std::string::npos);
 	}
 
 	static inline 
-	std::string trim_right(const std::string &str)
+	std::string trim_right(const std::string &s)
 	{
-	    std::string::size_type pos = str.find_last_not_of(' ');
-	    if (pos == std::string::npos) return std::string();
+	    auto p = s.find_last_not_of(' ');
+	    if (p == std::string::npos) return std::string();
 
-	    return str.substr(0, pos + 1);
+	    return s.substr(0, p + 1);
 	}
 
 	static inline 
-	std::string trim(const std::string& str)
+	std::string trim(const std::string& s)
 	{
-	    std::string::size_type pos1 = str.find_first_not_of(' ');
-	    if (pos1 == std::string::npos) return std::string();
+	    auto p1 = s.find_first_not_of(' ');
+	    if (p1 == std::string::npos) return std::string();
 
-	    std::string::size_type pos2 = str.find_last_not_of(' ');
-	    if (pos2 == std::string::npos) return std::string();
+	    auto p2 = s.find_last_not_of(' ');
+	    if (p2 == std::string::npos) return std::string();
 
-	    return str.substr(pos1 == std::string::npos ? 0 : pos1,
-	                      pos2 == std::string::npos ? (str.length() - 1) : (pos2 - pos1 + 1));
+	    return s.substr(p1 == std::string::npos ? 0 : p1,
+	                    p2 == std::string::npos ? (s.length() - 1) : (p2 - p1 + 1));
 	}
 
 	// inplace
 	static inline 
-	void trim(std::string& str)
+	void trim(std::string& s)
 	{
-	    std::string::size_type pos = str.find_last_not_of(' ');
-	    if(pos != std::string::npos) {
-	        str.erase(pos + 1);
-	        pos = str.find_first_not_of(' ');
-	        if(pos != std::string::npos) str.erase(0, pos);
+	    auto p = s.find_last_not_of(' ');
+	    if(p != std::string::npos) {
+	        s.erase(pos + 1);
+	        p = s.find_first_not_of(' ');
+	        if(p != std::string::npos) s.erase(0, p);
 	    }
 	    else
-	        str.erase(str.begin(), str.end());
+	        s.erase(s.begin(), s.end());
 	}
+}
 
 #endif
