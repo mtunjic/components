@@ -29,6 +29,52 @@ namespace mt {
 	template <Integer N>
 	N half(N n) { return n >> 1; }
 	
+	template <InputIterator I>
+	inline
+	I successor(I x) { return ++x; }
+
+	template <BidirectionalIterator I>
+	inline
+	I predecessor(I x) { return ++x; }
+
+	template <RandomAccessIterator I, Integral N>
+	inline
+	I successor(I x, N n, std::random_access_iterator_tag) { 
+	  return x + n;
+	}
+
+	template <InputIterator I, Integral N>
+	inline
+	I successor(I x, N n, std::input_iterator_tag) { 
+	  while (n != N(0)) {
+	    ++x;
+	    --n;
+	  }
+	  return x;
+	}
+
+	template <InputIterator I, Integral N>
+	inline
+	I successor(I x, N n) {
+	  typedef typename std::iterator_traits<I>::iterator_category C;
+	  return successor(x, n, C());
+	}
+
+	template <BidirectionalIterator I>
+	void hill(I first, I last)
+	{
+	  I middle = successor(first, std::distance(first, last)/2);
+	  iota(first, middle);
+	  reverse_iota(middle, last);
+	}
+
+	template <BidirectionalIterator I>
+	void valley(I first, I last)
+	{
+	  I middle = successor(first, std::distance(first, last)/2);
+	  reverse_iota(first, middle);
+	  iota(middle, last);
+	}
 	
 	// random_iota
 	template <ForwardIterator I>
@@ -40,26 +86,6 @@ namespace mt {
 	void random_iota(I first, I last) {
 		iota(first, last);
 		std::random_shuffle(first, last);
-	}
-	
-	// split
-	template <typename T, typename C>
-	void split(const std::basic_string<T>& s, std::string separators, C& c) {
-		
-		size_t n = s.length();
-		// find non-separtor chras
-		auto start = s.find_first_not_of(separators, 0);
-		
-		while (start < n) {  // until we have non separator charceter
-			// find end of current word
-			auto stop = s.find_first_of(separators, start);
-			if (stop > n) stop = n;
-			// add word to list of words
-			c.push_back(s.substr(start, stop - start));
-			// find start of next word
-			start = s.find_first_not_of(separators, stop+1);
-			
-		}
 	}
 	
 	// remove_if_not
