@@ -33,6 +33,7 @@ Algorithms &amp; Iterator Adaptors
 - [ ] extended_gcd (by A. Stepanov)
 - [ ] psort (hybrid, parallel and adaptive)
 - [ ] partial_bucketsort (hybrid with dual graphics cards)
+- [ ] insertion_sort, insertion_sort_n (adaptive)
 - [ ] zip, unzip, zip_with, zip_n
 - [ ] skip, skip_while 
 - [ ] take, take_while
@@ -51,14 +52,15 @@ Algorithms &amp; Iterator Adaptors
 - [x] sort_subrange
 
 ### Data Structures
-- [ ] tape
-- [ ] rope
-- [ ] slice
-- [ ] htable
-- [ ] grid
-- [ ] graph
-- [ ] dynamic_pqueue
-- [ ] quadtree
+- [ ] Tape
+- [ ] Rope
+- [ ] Slice
+- [ ] Htable
+- [ ] Grid
+- [ ] Vector2D, Vector3D
+- [ ] Graph
+- [ ] DynamicPQueue
+- [ ] Quadtree
 
 ### Iterator Adaptors
 - [ ] numeric_iterator
