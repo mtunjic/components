@@ -2,7 +2,9 @@
 Algorithms &amp; Iterator Adaptors
 
 ### Algorithms
-
+```
+- [x] binary_counter (by A. Stepanov)
+```
 - [x] split
 - [x] random
 - [ ] slice
@@ -33,7 +35,11 @@ Algorithms &amp; Iterator Adaptors
 - [ ] extended_gcd (by A. Stepanov)
 - [ ] psort (hybrid, parallel and adaptive)
 - [ ] partial_bucketsort (hybrid with dual graphics cards)
-- [ ] insertion_sort, insertion_sort_n (adaptive)
+- [ ] binary_insertion_sort_n (by A. Stepanov)
+- [ ] upper_bound_n
+- [ ] sort_sums (Lambert)
+- [x] sort_subrange
+- [ ] median_sort
 - [ ] zip, unzip, zip_with, zip_n
 - [ ] skip, skip_while 
 - [ ] take, take_while
@@ -48,8 +54,7 @@ Algorithms &amp; Iterator Adaptors
 - [ ] shift_by
 - [ ] border
 - [ ] matches (Knuth–Morris–Pratt)
-- [ ] sortsums (Lambert)
-- [x] sort_subrange
+
 
 ### Data Structures
 - [ ] Tape
