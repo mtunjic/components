@@ -94,7 +94,7 @@ Algorithms &amp; Iterator Adaptors
 - [x] fast_erase
 
 ### String ext
-- [ ] trim, trim_left, trim_right
+- [x] trim, trim_left, trim_right
 - [ ] left_pad, right_pad, center
 - [ ] capitalize, to_lower, to_title, to_upper
 - [ ] to_chars
@@ -108,6 +108,7 @@ Algorithms &amp; Iterator Adaptors
 - [ ] has_prefix, has_suffix
 - [ ] is_digit
 - [ ] pluralize
+- [x] split
 
 ### Utils
 - [ ] to_map, to_list, to_array
