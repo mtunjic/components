@@ -2,9 +2,8 @@
 Algorithms &amp; Iterator Adaptors
 
 ### Algorithms
-```
+
 - [x] binary_counter (by A. Stepanov)
-```
 - [x] split
 - [x] random
 - [ ] slice
@@ -92,6 +91,7 @@ Algorithms &amp; Iterator Adaptors
 - [x] delete_if, delete_if_not
 - [x] fill
 - [x] distinct
+- [x] fast_erase
 
 ### String ext
 - [ ] trim, trim_left, trim_right
@@ -115,7 +115,6 @@ Algorithms &amp; Iterator Adaptors
 - [x] print_range
 - [ ] digit_sum
 - [x] randomize, pick_a_number
-- [ ] fast_erase
 - [x] wait
 
 ```sh
