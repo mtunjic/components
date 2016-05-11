@@ -8,6 +8,38 @@
 
 #include "concepts.h"
 
+template <class I>
+inline bool is_zero(const I& x) {
+  return x == I(0);
+}
+
+template <class I>
+inline bool is_positive (const I& x) {
+  return x > I(0);
+}
+
+template <class I>
+inline void halve_non_negative ( I& x) {
+  assert(is_positive(x));
+  x >>= 1;
+}
+
+template <class I>
+inline void double_non_negative ( I& x) {
+  assert(is_positive(x));
+  x <<= 1;
+}
+
+template <class I>
+inline bool is_odd ( const I& x) {
+  return x & I(1);
+}
+
+template <class I>
+inline bool is_even ( const I& x) {
+  return !(x & I(1));
+}
+
 bool vowel(char c) {
   return std::strchr("aeiouAEIOU", c) != 0;
 }

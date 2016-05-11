@@ -84,6 +84,9 @@ Algorithms &amp; Iterator Adaptors
 - [x] minimum
 - [x] less_than, greater_than
 - [x] to_lower, to_upper, non_letter
+- [x] is_zero
+- [x] is_positive, halve_non_negative
+- [x] is_odd, is_even
 
 ### Vector ext
 - [x] keep_if, keep_if_not
@@ -132,6 +135,7 @@ Algorithms &amp; Iterator Adaptors
 
 ```sh
 > c++ -O3 -std=c++14 main.cpp -o main && ./main
+> c++ -O3 -std=c++14 bench.cpp -o bench && ./bench
 ```
 
 ``` cpp
