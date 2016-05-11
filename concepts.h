@@ -9,6 +9,7 @@
 #define Number typename
 #define Unsigned typename
 #define Integral typename
+#define UnsignedIntegral typename
 
 #define InputIterator typename
 #define OutputIterator typename

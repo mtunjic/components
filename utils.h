@@ -63,13 +63,6 @@ void print_range(I first, I last, const char* msg = nullptr) {
   std::cout << std::endl;
 }
 
-template<typename T>
-void fast_erase(std::vector<T>& v, size_t i)
-{
-    v[i] = std::move(v.back());
-    v.pop_back();
-}
-
 template<typename C>
 void sort(C& c)
 {
@@ -82,28 +75,6 @@ void sort(C& c, Pred p)
     std::sort(begin(c), end(c), p);
 }
 
-
-// string / text
-template<typename T>
-std::string to_string(const T& t)
-{
-	std::ostringstream os;
-	os << t;
-	return os.str();
-}
-
-
-
-template<typename T>
-T from_string(const std::string& s)
-{
-	std::istringstream is {s};
-	T t;
-	if (!(is >> t)) throw std::bad_cast{};
-	return t;
-}
-
-
 inline void wait()
 {
   std::cin.clear();
@@ -111,22 +82,6 @@ inline void wait()
   char ch;
   std::cin >> ch;
   return;
-}
-
-std::string random_string( size_t length )
-{
-    auto randchar = []() -> char
-    {
-        const char charset[] =
-        "0123456789"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "abcdefghijklmnopqrstuvwxyz";
-        const size_t max_index = (sizeof(charset) - 1);
-        return charset[ rand() % max_index ];
-    };
-    std::string str(length,0);
-    std::generate_n( str.begin(), length, randchar );
-    return str;
 }
 
 // timer

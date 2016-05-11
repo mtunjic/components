@@ -19,7 +19,6 @@ Algorithms &amp; Iterator Adaptors
 - [x] remove_if_not 
 - [ ] remove_if_not_backward
 - [x] reverse_n (by A. Stepanov)
-- [x] reverse_n (recursive, for foward iter)
 - [x] reverse_until
 - [x] reverse_n_with_buffer
 - [x] swap_ranges_n
@@ -28,7 +27,7 @@ Algorithms &amp; Iterator Adaptors
 - [x] copy_n (fixed interface)
 - [x] copy_n_with_buffer
 - [x] slide (by Sean Parent)
-- [x] gather (Marshall Clow)
+- [x] gather (by Marshall Clow)
 - [ ] min_max (by A. Stepanov and I. Pohl)
 - [ ] stein_gcd (by A. Stepanov)
 - [ ] extended_gcd (by A. Stepanov)
@@ -83,37 +82,50 @@ Algorithms &amp; Iterator Adaptors
 - [x] digit
 - [x] plus
 - [x] minimum
-- [x] less_than
-- [x] greater_than
+- [x] less_than, greater_than
+- [x] to_lower, to_upper, non_letter
 
 ### Vector ext
 - [x] keep_if, keep_if_not
 - [x] delete_if, delete_if_not
-- [x] fill
 - [x] distinct
 - [x] fast_erase
+- [x] read, read_nums
 
 ### String ext
-- [x] trim, trim_left, trim_right
+- [x] trim
+- [x] trim_left, trim_right
+- [x] trim_right_if, trim_left_if
+- [ ] trim_left_copy, trim_right_copy
+- [ ] trim_left_copy_if, trim_right_copy_if
 - [ ] left_pad, right_pad, center
-- [ ] capitalize, to_lower, to_title, to_upper
-- [ ] to_chars
+- [x] to_lower, to_title, to_upper
+- [x] to_upper_copy, to_lower_copy
 - [ ] chop, chomp
-- [ ] count, repeat
-- [ ] replace, reverse
-- [ ] gsub
+- [x] count, repeat
+- [ ] replace, replace_copy  
+- [x] reverse, reverse_copy
+- [ ] gsub, gsub_copy
 - [ ] contains, contains_any
-- [ ] to, from_string, to_string
-- [ ] remove_block
-- [ ] has_prefix, has_suffix
-- [ ] is_digit
+- [x] to, from_string, to_string
+- [x] remove, remove_if, remove_if_not, remove_copy_if_not
+- [x] has_prefix, has_suffix
+- [x] is_digit, is_palindrome, is_alpha, ignore_case
 - [ ] pluralize
-- [x] split
+- [x] split, split_copy
+- [x] has_char, repeat_char, to_chars
+- [x] random_string
+- [x] letters_copy, numbers_copy
+- [x] count_digits, count_letters
+- [x] sanitize, sanitize_copy, capitalize
+- [x] strip, strip_copy
+- [ ] crypt
 
 ### Utils
 - [ ] to_map, to_list, to_array
 - [x] stopwatch
-- [x] print_range
+- [x] print_range, print_pair, print_map, print_queue
+- [ ] print_tree, print_graph, print_matrix
 - [ ] digit_sum
 - [x] randomize, pick_a_number
 - [x] wait
@@ -212,6 +224,47 @@ mt::split(line, ",;.", list_words);
 
 	[ man, meal, moon, fat, food, feel, cat, coat, cook, love, leg, lunch ]
 */
+```
+#### String ext
+```cpp
+// trim_right_if
+std::string  s  = "woow!!!!";
+std::wstring ws = L"Awesome........";
+std::string  sp = "lot of space       ";
+trim_right_if(s, '!');   // woow
+trim_right_if(sp, ' ');  // Awesome
+trim_right_if(ws, L'.'); // lot of space
 
-``` 
+std::string s1 {"';;;'yep..'';"};s2 = trim_right_if(s1, is_any_of(";,.'")); // yep
+s3 = trim_left_if(trim_copy(s1), is_any_of(' '));
+
+std::wstring badstr {L"some,12<script>-1=1test29710-1---,.1888Osss"};
+sanitize(badstr); 	 // =>  some12script11test2971011888osss
+digits_copy(badstr); // =>  1211297101188810
+digits_copy(badstr); // =>  somescripttestOsss
+
+// prefix suffix
+std::string uristr {"https://www.google.com"};
+	
+if (has_prefix(uristr, "https://")) {
+	std::cout << "yes!" << std::endl;
+}
+	
+if (has_suffix(uristr, ".com")) {
+	std::cout << "yes!" << std::endl;
+}
+
+
+//find
+std::string fs {"-some1+2"};
+auto p = find_if_backward(fs.begin(), fs.end(), 
+						[](const char c) {return c == '+';});
+if (p != fs.end())
+	std::cout << "\nfound " << *p << "at " 
+	          << std::distance(begin(fs), p) << '\n';	
+// found + at 6
+
+```
+
+ 
 

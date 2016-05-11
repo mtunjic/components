@@ -51,6 +51,18 @@ namespace mt {
 	        ist.clear(ios_base::failbit); 
 	    }
 	}
+
+	// find_all
+	template<typename T>
+	using Iterator = typename T::iterator;
+	template<typename C, typename V>
+	std::vector<Iterator<C>> find_all(C& c, V v) {
+		std::vector<Iterator<C>> result;
+		for (auto p = c.begin(); p != c.end(); ++p)
+			if (*p == v)
+				result.emplace_back(p);
+		return result;
+	}
 }
 
 #endif

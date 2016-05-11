@@ -22,12 +22,16 @@
 
 namespace mt {
 	
-	
 	template <Integer N>
 	bool odd(N n) { return bool(n & 0x1); }
 	
 	template <Integer N>
 	N half(N n) { return n >> 1; }
+
+	template <UnsignedIntegral N>
+	uint8_t high_byte(N x) {
+  		return x >> ((sizeof(N) - 1) * 8);
+	}
 	
 	template <InputIterator I>
 	inline
@@ -93,18 +97,9 @@ namespace mt {
 	I remove_if_not(I first, I last, P pred)
 	{
 		return std::remove_if(first, last,
-													[&](const ValueType(I)& x){ return !pred(x); });
+			[&](const ValueType(I)& x){ return !pred(x); });
 	}
-	
-	// keep_if
-	template <Sequence S, Predicate P>
-	void keep_if(S&& s, P pred)
-	{
-		auto p = remove_if_not(std::begin(s), std::end(s), pred);
-		s.erase(p, std::end(s));
-	}
-	
-	
+		
 	// apply
 	template<ForwardIterator I, class Function>
 	void apply(I first, I last, Function f)
@@ -115,16 +110,20 @@ namespace mt {
 		}
 	}
 	
-	// find_backward
+	// find_if_backward
 	// (reverse neighbor find) searches a sequential data structure from end to beginning.
-	template<InputIterator I, typename T>
-	I find_backward(I first, I last, const T& x)
+	template<BidirectionalIterator I, Predicate P>
+	I find_if_backward(I first, I last, P pred)
 	{
-		while (last != first && last[-1] != x)
-			--last;
+		if (first != last) {
+			I p = last;
+			do {
+				if (pred(*--p))
+					return p;
+			} while (p != first);
+		}
 		return last;
 	}
-	
 	// random_range
 	// Usage:
 	// 	 std::vector<double> vec(12);
@@ -164,7 +163,6 @@ namespace mt {
 		}
 		return {first, dest};
 	}
-	
 	
 	// slide by Sean Parent
 	template <RandomAccessIterator I>
@@ -229,8 +227,6 @@ namespace mt {
   		return first;
   	}
 
-	
-	
 	// swap_ranges_n by Stepanov
 	template <ForwardIterator I0, ForwardIterator I1, Integer N>
 	auto swap_ranges_n(I0 first0, I1 first1, N n) -> std::pair<I0, I1>
@@ -269,18 +265,16 @@ namespace mt {
 		}
 	}
 	
-	
 	template <ForwardIterator I>
 	void reverse(I first, I last)
 	{
 		reverse_n(first, std::distance(first, last));
 	}
 
-
 	template <BidirectionalIterator I> 
 	auto reverse_until(I first , I middle, I last) -> std::pair<I,I>
 	{
-		while ( first != middle && middle != last ) {
+		while (first != middle && middle != last) {
 			--last;
 			std::swap(*first, *last);
 			++first;
@@ -289,26 +283,13 @@ namespace mt {
 	}
 
 	template <ForwardIterator I, Integer N, BidirectionalIterator B>
-	I reverse_n_with_buffer(I f, N n, B buffer) {
+	I reverse_n_with_buffer(I f, N n, B buffer)
+	{
 	    B buffer_end = copy_n(f, n, buffer);
 	    return std::reverse_copy(buffer, buffer_end, f);
 	}
 
-	
-	
-	
 	// ======================= EXT ======================================
-	// find_all
-	template<typename T>
-	using Iterator = typename T::iterator;
-	template<typename C, typename V>
-	std::vector<Iterator<C>> find_all(C& c, V v) {
-		std::vector<Iterator<C>> result;
-		for (auto p = c.begin(); p != c.end(); ++p)
-			if (*p == v)
-				result.emplace_back(p);
-		return result;
-	}
 	
 	// random
 	template <Sequence S, Number T>
@@ -326,7 +307,6 @@ namespace mt {
 		random(std::begin(s), end(s), range.first, range.second);
 	}
 	
-	
 	std::default_random_engine& global_urng() {
 		static std::default_random_engine  u{};
 		return u;
@@ -334,10 +314,9 @@ namespace mt {
 	
 	void randomize() {
 		static std::random_device  rd{};
-		global_urng().seed(rd());
-		
+		global_urng().seed(rd());		
 	}
-	
+
 	template<typename I>
 	void randomize(I first, I last) {
 		randomize();
@@ -349,14 +328,11 @@ namespace mt {
 		randomize(std::begin(c), std::end(c));
 	}
 	
-	
 	template<typename T>
 	T pick_a_number(T from, T thru) {
 		static std::normal_distribution<>  d{};
 		using  parm_t  = decltype(d)::param_type;
 		return d(global_urng(), parm_t{from, thru});
-	}
-	
+	}	
 }
-
 #endif
