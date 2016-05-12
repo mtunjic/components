@@ -87,6 +87,8 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [x] is_zero
 - [x] is_positive, halve_non_negative
 - [x] is_odd, is_even
+- [x] modulo_multiply
+- [x] identity_element
 
 ### Vector ext
 - [x] keep_if, keep_if_not
@@ -110,7 +112,7 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [x] reverse, reverse_copy
 - [ ] gsub, gsub_copy
 - [ ] contains, contains_any
-- [x] to, from_string, to_string
+- [x] to, from_string, to_string, to_int, to_single, to_double
 - [x] remove, remove_if, remove_if_not, remove_copy_if_not
 - [x] has_prefix, has_suffix
 - [x] is_digit, is_palindrome, is_alpha, 
@@ -120,7 +122,9 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [x] join, join_copy
 - [x] has_char, repeat_char, to_chars
 - [x] random_string
-- [x] letters_copy, numbers_copy
+- [x] setdelim (configure delimiters in the streams)
+- [x] letters_copy, numbers_copy, floats_copy (extract values out of a string)
+
 - [x] count_digits, count_letters
 - [x] sanitize, sanitize_copy, capitalize
 - [x] strip, strip_copy

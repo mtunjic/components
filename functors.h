@@ -8,34 +8,49 @@
 
 #include "concepts.h"
 
-template <class I>
+template <Integer I>
+struct modulo_multiply {
+    I modulus;
+    modulo_multiply(const I& i) : modulus(i) {}
+      
+    I operator() (const I& n, const I& m) const {
+        return (n * m) % modulus;
+    }
+};
+
+template <Integer I>
+I identity_element(const modulo_multiply<I>&) {
+  return I(1);
+}
+
+template <Number I>
 inline bool is_zero(const I& x) {
   return x == I(0);
 }
 
-template <class I>
+template <Number I>
 inline bool is_positive (const I& x) {
   return x > I(0);
 }
 
-template <class I>
+template <Number I>
 inline void halve_non_negative ( I& x) {
   assert(is_positive(x));
   x >>= 1;
 }
 
-template <class I>
+template <Number I>
 inline void double_non_negative ( I& x) {
   assert(is_positive(x));
   x <<= 1;
 }
 
-template <class I>
+template <Number I>
 inline bool is_odd ( const I& x) {
   return x & I(1);
 }
 
-template <class I>
+template <Number I>
 inline bool is_even ( const I& x) {
   return !(x & I(1));
 }
@@ -61,7 +76,7 @@ struct multiplies
   N operator() (const N& x, const N& y) { return x * y; }
 };
 
-template <typename N>
+template <Number N>
 struct divides
 {
   N operator() (const N& x, const N& y) {
@@ -70,13 +85,13 @@ struct divides
   }
 };
 
-template <typename N>
+template <Number N>
 struct fplus
 {
   N operator() (const N& x, const N& y) __attribute__((noinline));
 };
 
-template <typename N>
+template <Number N>
 N fplus<N>::operator() (const N& x, const N& y) {
   return x + y;
 }
