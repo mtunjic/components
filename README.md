@@ -89,6 +89,7 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [x] is_odd, is_even
 - [x] modulo_multiply
 - [x] identity_element
+- [x] printer
 
 ### Vector ext
 - [x] keep_if, keep_if_not
@@ -249,9 +250,9 @@ std::string s1 {"';;;'yep..'';"};s2 = trim_right_if(s1, is_any_of(";,.'")); // 
 s3 = trim_left_if(trim_copy(s1), is_any_of(' '));
 
 std::wstring badstr {L"some,12<script>-1=1test29710-1---,.1888Osss"};
-sanitize(badstr); 	 // =>  some12script11test2971011888osss
-digits_copy(badstr); // =>  1211297101188810
-digits_copy(badstr); // =>  somescripttestOsss
+sanitize(badstr); 	  // =>  some12script11test2971011888osss
+digits_copy(badstr);  // =>  1211297101188810
+letters_copy(badstr); // =>  somescripttestOsss
 
 // prefix suffix
 std::string uristr {"https://www.google.com"};
