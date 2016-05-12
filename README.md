@@ -1,10 +1,10 @@
 ## STL++ 
-Algorithms &amp; Iterator Adaptors
+Algorithms, Containers &amp; Iterator Adaptors
 
 ### Algorithms
 
 - [x] binary_counter (by A. Stepanov)
-- [x] split
+- [x] split, join
 - [x] random
 - [ ] slice
 - [x] random_iota
@@ -54,7 +54,7 @@ Algorithms &amp; Iterator Adaptors
 - [ ] matches (Knuth–Morris–Pratt)
 
 
-### Data Structures
+### Containers
 - [ ] Tape
 - [ ] Rope
 - [ ] Slice
@@ -113,9 +113,11 @@ Algorithms &amp; Iterator Adaptors
 - [x] to, from_string, to_string
 - [x] remove, remove_if, remove_if_not, remove_copy_if_not
 - [x] has_prefix, has_suffix
-- [x] is_digit, is_palindrome, is_alpha, ignore_case
+- [x] is_digit, is_palindrome, is_alpha, 
+- [x] compare_by, eq_ignore_case
 - [ ] pluralize
 - [x] split, split_copy
+- [x] join, join_copy
 - [x] has_char, repeat_char, to_chars
 - [x] random_string
 - [x] letters_copy, numbers_copy
