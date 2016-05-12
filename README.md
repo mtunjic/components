@@ -102,8 +102,6 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [x] trim
 - [x] trim_left, trim_right
 - [x] trim_right_if, trim_left_if
-- [ ] trim_left_copy, trim_right_copy
-- [ ] trim_left_copy_if, trim_right_copy_if
 - [ ] left_pad, right_pad, center
 - [x] to_lower, to_title, to_upper
 - [x] to_upper_copy, to_lower_copy
@@ -125,7 +123,6 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [x] random_string
 - [x] setdelim (configure delimiters in the streams)
 - [x] letters_copy, numbers_copy, floats_copy (extract values out of a string)
-
 - [x] count_digits, count_letters
 - [x] sanitize, sanitize_copy, capitalize
 - [x] strip, strip_copy
@@ -242,12 +239,15 @@ mt::split(line, ",;.", list_words);
 std::string  s  = "woow!!!!";
 std::wstring ws = L"Awesome........";
 std::string  sp = "lot of space       ";
-trim_right_if(s, '!');   // woow
-trim_right_if(sp, ' ');  // Awesome
-trim_right_if(ws, L'.'); // lot of space
+trim_right_if(s, '!');   // => woow
+trim_right_if(sp, ' ');  // => Awesome
+trim_right_if(ws, L'.'); // => lot of space
 
-std::string s1 {"';;;'yep..'';"};s2 = trim_right_if(s1, is_any_of(";,.'")); // yep
-s3 = trim_left_if(trim_copy(s1), is_any_of(' '));
+std::string s1 {"';;;'yep..'';"};s2 = trim_right_if(s1, is_any_of(";,.'")); // => yep
+std::string srcp {"trim me     "};         // => len: 12
+// same as default trim_right 
+trim_right_if(srcp, is_space);             // => trim me (len: 7)
+
 
 std::wstring badstr {L"some,12<script>-1=1test29710-1---,.1888Osss"};
 sanitize(badstr); 	  // =>  some12script11test2971011888osss
@@ -257,13 +257,18 @@ letters_copy(badstr); // =>  somescripttestOsss
 // prefix suffix
 std::string uristr {"https://www.google.com"};
 	
-if (has_prefix(uristr, "https://")) {
+if (has_prefix(uristr, "https://")) 
 	std::cout << "yes!" << std::endl;
-}
 	
-if (has_suffix(uristr, ".com")) {
+if (has_suffix(uristr, ".com")) 
 	std::cout << "yes!" << std::endl;
-}
+
+// find_f and find_if_not
+std::string sr{"-1,2,3;name=marko$"};
+// remove all digits
+remove_if(sr, ::isdigit);			// => -,,;name=marko$
+// remove all non-digits
+remove_if_not(sr2, ::isdigit);	// => 123
 
 
 //find
@@ -274,6 +279,10 @@ if (p != fs.end())
 	std::cout << "\nfound " << *p << "at " 
 	          << std::distance(begin(fs), p) << '\n';	
 // found + at 6
+
+// to_lower, to_upper...
+to_lower("MARKO") // => marko
+to_upper("cpp")   // => CPP
 
 ```
 
