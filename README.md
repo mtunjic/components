@@ -51,7 +51,7 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] border
 - [ ] matches (Knuth–Morris–Pratt)
 
-#### Hybrid, parallel and adaptive
+##### Hybrid, parallel and adaptive
 - [ ] psort (parallel and adaptive)
 - [ ] partial_bucketsort (hybrid with dual graphics cards)
 - [ ] map 
