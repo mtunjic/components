@@ -31,8 +31,6 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] min_max (by A. Stepanov and I. Pohl)
 - [ ] stein_gcd (by A. Stepanov)
 - [ ] extended_gcd (by A. Stepanov)
-- [ ] psort (hybrid, parallel and adaptive)
-- [ ] partial_bucketsort (hybrid with dual graphics cards)
 - [ ] binary_insertion_sort_n (by A. Stepanov)
 - [ ] upper_bound_n
 - [ ] sort_sums (Lambert)
@@ -52,6 +50,14 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] shift_by
 - [ ] border
 - [ ] matches (Knuth–Morris–Pratt)
+
+#### Parallel
+- [ ] psort (hybrid, parallel and adaptive)
+- [ ] partial_bucketsort (hybrid with dual graphics cards)
+- [ ] parallel_map 
+- [ ] parallel_reduce 
+- [ ] parallel_fold
+- [ ] parallel_find
 
 
 ### Containers
@@ -130,7 +136,7 @@ Algorithms, Containers &amp; Iterator Adaptors
 
 ### Utils
 - [ ] to_map, to_list, to_array
-- [x] stopwatch
+- [x] stopwatch, guarded_thread
 - [x] print_range, print_pair, print_map, print_queue
 - [ ] print_tree, print_graph, print_matrix
 - [ ] digit_sum
