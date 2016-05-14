@@ -137,8 +137,7 @@ Algorithms, Containers &amp; Iterator Adaptors
 ### Utils
 - [ ] to_map, to_list, to_array
 - [x] stopwatch, guarded_thread
-- [x] print_range, print_pair, print_map, print_queue
-- [ ] print_tree, print_graph, print_matrix
+- [x] print (range, pair, map, queue, tree, graph, matrix)
 - [ ] digit_sum
 - [x] randomize, pick_a_number
 - [x] wait
