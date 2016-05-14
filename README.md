@@ -51,13 +51,13 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] border
 - [ ] matches (Knuth–Morris–Pratt)
 
-#### Parallel
-- [ ] psort (hybrid, parallel and adaptive)
+#### Hybrid, parallel and adaptive
+- [ ] psort (parallel and adaptive)
 - [ ] partial_bucketsort (hybrid with dual graphics cards)
-- [ ] parallel_map 
-- [ ] parallel_reduce 
-- [ ] parallel_fold
-- [ ] parallel_find
+- [ ] map 
+- [ ] reduce 
+- [ ] fold
+- [ ] pfind
 
 
 ### Containers
