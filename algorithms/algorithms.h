@@ -8,7 +8,8 @@
 
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
-#include "concepts.h"
+
+#include "concepts.h" // transition to Concepts Lite
 #include <iterator>
 #include <iostream>
 #include <vector>
@@ -31,24 +32,45 @@ namespace mt {
 	uint8_t high_byte(N x) {
 		return x >> ((sizeof(N) - 1) * 8);
 	}
-	
-	template <InputIterator I>
-	inline
+
+	//===================================================
+	// advance
+	//===================================================
+  	template<Input_iterator I>
+  	void advance(I& i, Difference_type<I> n)
+  	{
+  		while (n--) ++i;
+	}
+
+	template<Bidirectional_iterator I>
+  	void advance(I& i, Difference_type<I> n)
+  	{
+    	if (n > 0) while (n--) ++i;
+    	if (n < 0) while (n++) --i;
+  	}
+
+  	template<Random_access_iterator I>
+  	void advance(I& i, Difference_type<I> n)
+  	{
+		i += n; 
+	}
+
+	//===================================================
+	// successor
+	//===================================================
+	template <Input_iterator I>
 	I successor(I x) { return ++x; }
 	
-	template <BidirectionalIterator I>
-	inline
+	template <Bidirectional_iterator I>
 	I predecessor(I x) { return ++x; }
 	
-	template <RandomAccessIterator I, Integral N>
-	inline
-	I successor(I x, N n, std::random_access_iterator_tag) {
+	template <Random_access_iterator I>
+	I successor(I x, Difference_type<I> n) {
 		return x + n;
 	}
 	
-	template <InputIterator I, Integral N>
-	inline
-	I successor(I x, N n, std::input_iterator_tag) {
+	template <Input_iterator I>
+	I successor(I x, Difference_type<I> n) {
 		while (n != N(0)) {
 			++x;
 			--n;
@@ -56,63 +78,60 @@ namespace mt {
 		return x;
 	}
 	
-	template <InputIterator I, Integral N>
-	inline
-	I successor(I x, N n)
+	template <Input_iterator I>
+	I successor(I x, Difference_type<I> n)
 	{
-		typedef typename std::iterator_traits<I>::iterator_category C;
-		return successor(x, n, C());
+		return successor(x, n, Iterator_category<I>());
 	}
 	
-	template <BidirectionalIterator I>
+	//===================================================
+	// hill & valley
+	//===================================================
+	template <Bidirectional_iterator I>
 	void hill(I first, I last)
 	{
-		I middle = successor(first, std::distance(first, last)/2);
+		I middle = successor(first, distance(first, last)/2);
 		iota(first, middle);
 		reverse_iota(middle, last);
 	}
 	
-	template <BidirectionalIterator I>
+	template <Bidirectional_iterator I>
 	void valley(I first, I last)
 	{
-		I middle = successor(first, std::distance(first, last)/2);
+		I middle = successor(first, distance(first, last)/2);
 		reverse_iota(first, middle);
 		iota(middle, last);
 	}
 	
-	// random_iota
-	template <ForwardIterator I>
+	//===================================================
+	// iota & random_iota
+	//===================================================
+	template <Forward_iterator I>
 	void iota(I first, I last) {
 		iota(first, last, ValueType(I)(0), ValueType(I)(1));
 	}
 	
-	template <RandomAccessIterator I>
+	template <Random_access_iterator I>
 	void random_iota(I first, I last) {
 		iota(first, last);
 		std::random_shuffle(first, last);
 	}
 	
-	// remove_if_not
-	template <ForwardIterator I, Predicate P>
-	I remove_if_not(I first, I last, P pred)
+	//===================================================
+	// find_if_n & find_if_backward
+	//===================================================
+	template <Input_iterator I, Number N, UnaryPredicate P>
+	auto find_if_n(I first, Difference_type<I> n, P p) -> std::pair<I, N>
 	{
-		return std::remove_if(first, last,
-							  [&](const ValueType(I)& x){ return !pred(x); });
-	}
-	
-	// apply
-	template<ForwardIterator I, class Function>
-	void apply(I first, I last, Function f)
-	{
-		while (first != last) {
-			*first = f(*first);
+		while (n && !p(*first)) {
 			++first;
+			--n;
 		}
+		return {first, n}; 
 	}
-	
-	
-	template<BidirectionalIterator I, typename T>
-	I find_if_backward(I first, I last, const T& x)
+
+	template<Bidirectional_iterator I>
+	I find_if_backward(I first, I last, const Difference_type<I>& x)
 	{
 		if (first != last) {
 			I p = last;
@@ -124,35 +143,45 @@ namespace mt {
 		return last;
 	}
 	
+	//===================================================
 	// random_range
-	// Usage:
-	// 	 std::vector<double> vec(12);
-	//	 random_range(vec, 5.0, 0.5);
-	template <InputIterator I, Number T>
+	//===================================================
+	template <Input_iterator I, Number T>
 	void random(I first, I last, T min, T max) {
 		
 		std::random_device rnd_device;
 		std::mt19937_64 rng {rnd_device()};
 		std::normal_distribution<> norm {min, max};
 		
-		std::generate(first, last,[&norm, &rng]{ return norm(rng); });
-		
+		std::generate(first, last,[&norm, &rng]{ return norm(rng); });	
 	}
 	
-	// find_if_n
-	// For counted ranges, formed by specifying a position and a count of elements n.
-	template <InputIterator I, Number N, UnaryPredicate P>
-	auto find_if_n(I first, N n, P p) -> std::pair<I, N>
+	//===================================================
+	// remove_if_not
+	//===================================================
+	template <Forward_iterator I, Predicate P>
+	I remove_if_not(I first, I last, P pred)
 	{
-		while (n && !p(*first)) {
-			++first;
-			--n;
-		}
-		return {first, n}; // n is how many more steps are left
+		return std::remove_if(first, last,
+							  [&](const ValueType(I)& x){ return !pred(x); });
 	}
 	
+	//===================================================
+	// apply
+	//===================================================
+	template<Forward_iterator I, class Function>
+	void apply(I first, I last, Function f)
+	{
+		while (first != last) {
+			*first = f(*first);
+			++first;
+		}
+	}
+	
+	//===================================================
 	// copy_n
-	template <InputIterator I, OutputIterator O, Number N>
+	//===================================================
+	template <Forward_iterator I, Output_iterator O, Number N>
 	auto copy_n(I first, N n, O dest) -> std::pair<I, O>
 	{
 		while (n) {
@@ -164,8 +193,10 @@ namespace mt {
 		return {first, dest};
 	}
 	
-	// slide by Sean Parent
-	template <RandomAccessIterator I>
+	//===================================================
+	//  slide by Sean Parent
+	//===================================================
+	template <Random_access_iterator I>
 	auto slide(I first, I last, I p) -> std::pair<I, I>
 	{
 		if (p < first) return { p, std::rotate(p, first, last) };
@@ -173,18 +204,21 @@ namespace mt {
 		return { first, last };
 	}
 	
-	// gather by Marshall Clow
-	template <BidirectionalIterator I, Predicate P>
+	//===================================================
+	//  slide by Marshall Clow
+	//===================================================
+	template <Bidirectional_iterator I, Predicate P>
 	auto gather(I first, I last, I pos, P pred) -> std::pair<I, I>
-	{
-		
+	{	
 		return{ std::stable_partition(first, pos,
-									  [&](const ValueType(I)& x){ return !pred(x); }),
+					[&](const ValueType(I)& x){ return !pred(x); }),
 			std::stable_partition(pos, last, pred) };
 	}
 	
-	// stable_partition_position by Sean Parent
-	template <InputIterator I, UnaryPredicate P>
+	//===================================================
+	//  stable_partition_position by Sean Parent
+	//===================================================
+	template <Input_iterator I, UnaryPredicate P>
 	auto stable_partition_position(I first, I last, P p) -> I
 	{
 		auto n = last - first;
@@ -196,8 +230,10 @@ namespace mt {
 							   stable_partition_position(middle, last, p));
 	}
 	
+	//===================================================
 	// sort_subrange
-	template <RandomAccessIterator I0, RandomAccessIterator I1>
+	//===================================================
+	template <Random_access_iterator I0, Random_access_iterator I1>
 	void sort_subrange(I0 first0, I0 last0, I1 first1, I1 last1)
 	{
 		if (first1 == last1) return;
@@ -208,8 +244,10 @@ namespace mt {
 		std::partial_sort(first1, last1, last0);
 	}
 	
-	// partition_point_n by Stepanov
-	template <InputIterator I, Integral N, UnaryPredicate P>
+	//===================================================
+	// *partition_point_n* by Stepanov
+	//===================================================
+	template <Input_iterator I, Integral N, UnaryPredicate P>
 	I partition_point_n(I first, N n, P pred)
 	{  // precondition: is_partitioned_n(first, n, pred)
 		while (n) {
@@ -227,8 +265,10 @@ namespace mt {
 		return first;
 	}
 	
-	// swap_ranges_n by Stepanov
-	template <ForwardIterator I0, ForwardIterator I1, Integer N>
+	//===================================================
+	// swap_ranges_n
+	//===================================================
+	template <Forward_iterator I0, Forward_iterator I1, Integer N>
 	auto swap_ranges_n(I0 first0, I1 first1, N n) -> std::pair<I0, I1>
 	{
 		while (n != N(0)) {
@@ -238,11 +278,15 @@ namespace mt {
 		return {first0, first1};
 	}
 	
-	// reverse by Stepanov
-	// reverse that works on forward iterators and uses not more than O(log(n)) of
-	// additional storage and not more than O(nlog(n)) steps, where n is the size of the range
-	// which came in handy when we want to reverse ForwardIterator
-	template <ForwardIterator I, Integer N>
+	//===================================================
+	// *reverse* by Stepanov
+	//===================================================
+	// reverse that works on forward iterators and uses not
+	// more than O(log(n)) of additional storage and
+	// not more than O(nlog(n)) steps, where n is the 
+	// size of the range, which came in handy when we want 
+	// to reverse ForwardIterator
+	template <Forward_iterator I, Integer N>
 	I reverse_n(I first, N n)
 	{
 		if (n == 0) return first;
@@ -256,7 +300,7 @@ namespace mt {
 		return result;
 	}
 	
-	template <BidirectionalIterator I, Integer N>
+	template <Bidirectional_iterator I, Integer N>
 	void reverse_n(I first, I last, N n)
 	{
 		n = half(n);
@@ -265,13 +309,13 @@ namespace mt {
 		}
 	}
 	
-	template <ForwardIterator I>
+	template <Forward_iterator I>
 	void reverse(I first, I last)
 	{
 		reverse_n(first, std::distance(first, last));
 	}
 	
-	template <BidirectionalIterator I>
+	template <Bidirectional_iterator I>
 	auto reverse_until(I first , I middle, I last) -> std::pair<I,I>
 	{
 		while (first != middle && middle != last) {
@@ -282,7 +326,7 @@ namespace mt {
 		return {first , last};
 	}
 	
-	template <ForwardIterator I, Integer N, BidirectionalIterator B>
+	template <Forward_iterator I, Integer N, BidirectionalIterator B>
 	I reverse_n_with_buffer(I f, N n, B buffer)
 	{
 		B buffer_end = copy_n(f, n, buffer);

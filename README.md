@@ -71,6 +71,10 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] DynamicPQueue
 - [ ] Quadtree
 
+##### Thread-safe Container Adaptors- [ ] stack
+- [ ] queue
+- [ ] priority_queue 
+
 ### Iterator Adaptors
 - [ ] numeric_iterator
 - [ ] step_iterator
@@ -136,11 +140,13 @@ Algorithms, Containers &amp; Iterator Adaptors
 
 ### Utils
 - [ ] to_map, to_list, to_array
-- [x] stopwatch, guarded_thread
+- [x] stopwatch
+- [ ] thread_guard, join_threads
 - [x] print (range, pair, map, queue, tree, graph, matrix)
 - [ ] digit_sum
 - [x] randomize, pick_a_number
 - [x] wait
+- [ ] bench
 
 ```sh
 > c++ -O3 -std=c++14 main.cpp -o main && ./main
