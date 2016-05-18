@@ -177,28 +177,27 @@ namespace mt {
 	
 	//===========================split, strim, ========================================
 	// split string
-	template <typename T, typename C>
-	void split(const rune<T>& s, std::string separators, C& c) {
+	template <typename T>
+	void split(const std::string& s, std::string sep, std::vector<T>& v) {
 		
 		if (s.empty())
 			return;
 		
 		size_t n = s.length();
-//		c.clear();
-//		c.reserve(n);  split: 8,033ms  (6 ~ 7)
+		v.clear();
+		v.reserve(n);
 
-	
-		// find non-separtor chras
-		auto start = s.find_first_not_of(separators, 0);
+		auto start = s.find_first_not_of(sep, 0);
 		
-		while (start < n) {  // until we have non separator charceter
-			// find end of current word
-			auto stop = s.find_first_of(separators, start);
+		while (start < n) {
+			auto stop = s.find_first_of(sep, start);
 			if (stop > n) stop = n;
-			// add word to list of words
-			c.push_back(s.substr(start, stop - start));
-			// find start of next word
-			start = s.find_first_not_of(separators, stop+1);
+			std::istringstream is {s.substr(start, stop - start)};
+			T t;
+			if (is >> t)
+				v.push_back(t);
+
+			start = s.find_first_not_of(sep, stop+1);
 			
 		}
 	}
