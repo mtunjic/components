@@ -20,6 +20,7 @@
 #include <functional>
 #include <random>
 
+
 namespace mt {
 
 template <Integer N>
@@ -62,6 +63,7 @@ void advance(I& i, Difference_type<I> n)
 //===================================================
 // successor
 //===================================================
+
 template <Input_iterator I>
 I successor(I x) {
     return ++x;
@@ -126,7 +128,7 @@ void random_iota(I first, I last) {
 }
 
 //===================================================
-// find_if_n & find_if_backward
+// find_if_n & find_backward_if
 //===================================================
 template <Input_iterator I, Number N, UnaryPredicate P>
 auto find_if_n(I first, Difference_type<I> n, P p) -> std::pair<I, N>
@@ -138,18 +140,16 @@ auto find_if_n(I first, Difference_type<I> n, P p) -> std::pair<I, N>
     return {first, n};
 }
 
-template<Bidirectional_iterator I>
-I find_if_backward(I first, I last, const Difference_type<I>& x)
+
+template <Bidirectional_iterator I, Unary_predicate P>
+I find_backward_if(I first, I last, P p)
 {
-    if (first != last) {
-        I p = last;
-        do {
-            if (*--p == x)
-                return p;
-        } while (p != first);
+    while (true) {
+        if (first == last) return first;
+        if (p(*--last))    return ++last;
     }
-    return last;
 }
+
 
 //===================================================
 // random_range

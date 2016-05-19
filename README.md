@@ -12,10 +12,10 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] apply_until
 - [x] find_all
 - [x] find_if_n
-- [ ] find_if_n_backward
+- [ ] find_backward_if_n
 - [x] find_backward
-- [ ] find_if_backward
-- [ ] find_if_not_backward
+- [x] find_backward_if
+- [ ] find_backward_if_not
 - [x] remove_if_not 
 - [ ] remove_if_not_backward
 - [x] reverse_n (by A. Stepanov)
@@ -50,6 +50,7 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] shift_by
 - [ ] border
 - [ ] matches (Knuth–Morris–Pratt)
+- [ ] next_combination
 
 ##### Hybrid, parallel and adaptive
 - [ ] psort (parallel and adaptive)
@@ -71,7 +72,8 @@ Algorithms, Containers &amp; Iterator Adaptors
 - [ ] DynamicPQueue
 - [ ] Quadtree
 
-##### Thread-safe Container Adaptors- [ ] stack
+##### Thread-safe Container Adaptors
+- [ ] stack
 - [ ] queue
 - [ ] priority_queue 
 
@@ -154,6 +156,19 @@ Algorithms, Containers &amp; Iterator Adaptors
 ```
 
 ``` cpp
+
+// find_backward_if
+vector<int> v{5,3,2,3,1,2,0,1,8,9,4,3};
+	
+auto p = mt::find_backward_if(v.begin(), v.end(),
+							  [&](const int x) { return x == 0;});
+if (p != v.end()) {
+		cout << " found." << endl;
+	} else {
+		cout << " not found." << endl;
+	}
+	
+	
 // gather
 std::array<int, 10> a10{9,0,1,4,4,0,7,7,8,0};
 auto insertPos = std::begin(a10) + 4;
@@ -254,7 +269,8 @@ trim_right_if(s, '!');   // => woow
 trim_right_if(sp, ' ');  // => Awesome
 trim_right_if(ws, L'.'); // => lot of space
 
-std::string s1 {"';;;'yep..'';"};s2 = trim_right_if(s1, is_any_of(";,.'")); // => yep
+std::string s1 {"';;;'yep..'';"};
+s2 = trim_right_if(s1, is_any_of(";,.'")); // => yep
 std::string srcp {"trim me     "};         // => len: 12
 // same as default trim_right 
 trim_right_if(srcp, is_space);             // => trim me (len: 7)
